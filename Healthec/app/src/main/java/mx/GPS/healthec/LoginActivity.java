@@ -14,7 +14,13 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_registrar, btn_ingresar, btn_recuperar;
     EditText et_email, et_password;
 
+
+    //METODO ONCREATE, SE EJECUTA CUNADO LOGINACTIVITY SE INICIA
     @Override
+    //Llama al método onCreate() de la clase base Activity utilizando el parámetro savedInstanceState.
+    //este método establece el diseño de la actividad y busca los elementos de la interfaz de
+    // usuario para poder interactuar con ellos posteriormente en la aplicación.
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -30,7 +36,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //SE DECLARA UNA INSTANCIA DE UserModel llamada usuario
                 UserModel usuario;
+                //Se intenta crear una nueva instancia de UserModel utilizando los valores ingresados
+                // en los campos de correo electrónico y contraseña de la interfaz de usuario.
+                // Si se produce una excepción, se muestra un mensaje de error y se crea una instancia de
+                // UserModel con valores predeterminados ("error" y "-1").
                 try{
                     usuario = new UserModel(-1, et_email.getText().toString(),
                             et_password.getText().toString());
@@ -40,8 +51,15 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     usuario = new UserModel(-1, "error", "error");
                 }
+
+                //Se declara una instancia de DataBaseHealthec, que es una clase que maneja la base de datos
+                // SQL utilizada por la aplicación.
                 DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(LoginActivity.this);
 
+
+                //Se llama al método "addOne" de la instancia de DataBaseHealthec, pasando como argumento
+                // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
+                // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
                 boolean exist = dataBaseHealthec.addOne(usuario);
 
                 if( exist ){
@@ -53,6 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         });
         //----------------------------------------------------------------------------------------//
         btn_registrar.setOnClickListener(new View.OnClickListener() {
+
+            //METODO ONCLICK este método se encarga de crear un nuevo usuario con los valores
+            // ingresados en la interfaz de usuario y agregarlo a la base de datos de la aplicación.
             @Override
             public void onClick(View view) {
 
