@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Healthec</string>
+    <string name="UsuarioCorreo">Correo</string>
+    <string name="UsuarioContraseña">Contraseña</string>
 </resources>
