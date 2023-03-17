@@ -2,6 +2,7 @@ package mx.GPS.healthec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,9 +64,12 @@ public class LoginActivity extends AppCompatActivity {
                 boolean exist = dataBaseHealthec.addOne(usuario);
 
                 if( exist ){
-                    //codigo para entrar al menu principal
+                    //codigo para entrar al menu principal donde se encuentran todas las opciones
+                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
                 } else {
                     //codigo para representar que el usuario no existe
+                    Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
