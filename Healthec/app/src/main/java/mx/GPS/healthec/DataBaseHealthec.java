@@ -13,24 +13,34 @@ import java.util.List;
 
 public class DataBaseHealthec extends SQLiteOpenHelper {
 
+    //En esta seccion se definen las costantes que se utilizaran para referirnos a la tabla y las columnas de la base de datos
+    //-------------------------------------------------------------------------
+    // En esta parte definimos la constantes a utilizar en la tabla usuario y sus columnas
     public static final String TABLA_USUARIO = "TABLA_USUARIO";
     public static final String COLUMNA_USUARIO_CORREO = "USUARIO_CORREO";
     public static final String COLUMNA_USUARIO_CLAVE = "USUARIO_CLAVE";
     public static final String COLUMNA_USUARIO_ID = "USUARIO_ID";
-
+    //-----------------------------------------------------------------------
+    //En esta parte definimos la constantes a utilizar en la tabla recodartorios y sus columnas
     public static final String TABLA_RECORDATORIOS = "TABLA_RECORDATORIOS";
     public static final String COLUMNA_RECORDATORIOS_CLINICA = "COLUMNA_RECORDATORIOS_CLINICA";
     public static final String COLUMNA_RECORDATORIOS_MEDICO = "COLUMNA_RECORDATORIOS_MEDICOS";
     public static final String COLUMNA_RECORDATORIOS_FECHAHORA = "COLUMNA_RECORDATORIOS_FECHAHORA";
     public static final String COLUMNA_RECORDATORIOS_ID = "COLUMNA_RECORDATORIOS_ID";
     public static final String COLUMNA_HORARIOSUEÑO_ID = "COLUMNA_HORARIOSUEÑO_ID";
+    //-----------------------------------------------------------------------
+    //En esta parte definimos la constantes a utilizar en la tabla horario, sueño y sus columnas
     public static final String TABLA_HORARIOSUEÑO = "TABLA_HORARIOSUEÑO ";
     public static final String COLUMNA_HORARIOSUEÑO_DIA = "COLUMNA_HORARIOSUEÑO_DIA";
     public static final String COLUMNA_HORARIOSUEÑO_HORA = "COLUMNA_HORARIOSUEÑO_HORA";
+    //-----------------------------------------------------------------------
+    //En esta parte definimos la constantes a utilizar en la tabla recetarios y sus columnas
     public static final String TABLA_RECETARIOS = "TABLA_RECETARIOS";
     public static final String COLUMNA_RECETARIOS_ID = "COLUMNA_RECETARIOS_ID";
     public static final String COLUMNA_RECETARIOS_RECETA = "COLUMNA_RECETARIOS_RECETA";
     public static final String COLUMNA_RECETARIOS_PASOS = "COLUMNA_RECETARIOS_PASOS";
+    //-----------------------------------------------------------------------
+    //En esta parte definimos la constantes a utilizar en la tabla consejos y sus columnas
     public static final String TABLA_CONSEJOS = "TABLA_CONSEJOS";
     public static final String COLUMNA_CONSEJOS_ID = "COLUMNA_CONSEJOS_ID";
     public static final String COLUMNA_CONSEJOS_DESCRIPCION = "COLUMNA_CONSEJOS_DESCRIPCION";
@@ -44,6 +54,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     //una nueba db
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Aqui se crean las tablas de la base de datos y se definen los tipos de datos de las columnas
         String createTableUsuario = "CREATE TABLE "+ TABLA_USUARIO + " (" + COLUMNA_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_USUARIO_CORREO + " TEXT, " + COLUMNA_USUARIO_CLAVE + " TEXT)";
         String createTableRecordatorios =  "CREATE TABLE "+ TABLA_RECORDATORIOS + " (" + COLUMNA_RECORDATORIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECORDATORIOS_MEDICO + " TEXT, " + COLUMNA_RECORDATORIOS_FECHAHORA + " TEXT,"+COLUMNA_RECORDATORIOS_CLINICA+"TEXT)";
         String createTableRecetarios = "CREATE TABLE " + TABLA_RECETARIOS + " (" + COLUMNA_RECETARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETARIOS_RECETA + " TEXT, " + COLUMNA_RECETARIOS_PASOS + " TEXT)";
