@@ -1,21 +1,22 @@
 package mx.GPS.healthec;
 
 public class UserModel {
+
+    //Atributos de la clase usuario
     private int idUser;
     private String email;
     private String password;
-
+    //Constructor de la clase Usuario
     public UserModel(int idUser, String email, String password) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
     }
-
+    //Constructor vacío de la clase usuario
     public UserModel() {
     }
 
     //toString es necesario para imprimir el contenido de objetos de la clase
-
     @Override
     public String toString() {
         return "UserModel{" +
@@ -25,7 +26,7 @@ public class UserModel {
                 '}';
     }
 
-    //getters and setters
+    //getters and setters de los atributos de la clase
     public int getIdUser() {
         return idUser;
     }
