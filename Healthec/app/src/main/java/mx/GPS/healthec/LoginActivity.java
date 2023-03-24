@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if( exist ){
                     //codigo para entrar al menu principal donde se encuentran todas las opciones
-                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity( new Intent(LoginActivity.this, MenuActivity.class));
                 } else {
                     //codigo para representar que el usuario no existe
                     Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent intent = new Intent(getApplicationContext(), RegistroActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
                 startActivity(intent);
             }
         });
@@ -130,14 +130,14 @@ public class LoginActivity extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 HomeActivity();
             } catch (ApiException e) {
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error 1", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void HomeActivity() {
         finish();
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
         startActivity(intent);
     }
 }

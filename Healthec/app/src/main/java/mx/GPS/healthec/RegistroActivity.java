@@ -35,11 +35,33 @@ public class RegistroActivity extends AppCompatActivity {
 
         gsc = GoogleSignIn.getClient(this, gso);
 
+        DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(RegistroActivity.this);
+
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         if( account != null ){
             UserModel usuario;
-            usuario = new UserModel(-1, account.getDisplayName(), account.getEmail(), null);
+            try{
+                usuario = new UserModel(-1, account.getEmail(), null, account.getDisplayName());
+                Toast.makeText(RegistroActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
+            }
+            catch (Exception e){
+                Toast.makeText(RegistroActivity.this, "Error con la cuenta de google",
+                        Toast.LENGTH_SHORT).show();
+                usuario = new UserModel(-1, "error", "error", "error");
+            }
+
+            boolean success = dataBaseHealthec.addOne(usuario);
+
+            try{
+                if(success){
+                    startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
+                }
+            }catch (Exception e){
+                Toast.makeText(RegistroActivity.this, "No se pudo registrar correctamente",
+                        Toast.LENGTH_LONG).show();
+            }
+
         }
 
         btn_registroAceptar.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +78,6 @@ public class RegistroActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     usuario = new UserModel(-1, "error", "error", "error");
                 }
-                DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(RegistroActivity.this);
 
                 boolean success = dataBaseHealthec.addOne(usuario);
 
