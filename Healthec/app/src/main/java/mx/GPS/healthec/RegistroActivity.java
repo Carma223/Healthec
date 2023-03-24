@@ -55,6 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             try{
                 if(success){
+                    finish();
                     startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
                 }
             }catch (Exception e){
@@ -79,10 +80,10 @@ public class RegistroActivity extends AppCompatActivity {
                     usuario = new UserModel(-1, "error", "error", "error");
                 }
 
-                boolean success = dataBaseHealthec.addOne(usuario);
-
                 try{
+                boolean success = dataBaseHealthec.addOne(usuario);
                     if(success){
+                        finish();
                         startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
                     }
                 }catch (Exception e){

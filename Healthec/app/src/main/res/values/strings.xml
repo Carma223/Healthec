@@ -5,4 +5,8 @@
     <string name="Registrarse">Registrarse</string>
     <string name="Nombre">Nombre</string>
     <string name="Aceptar">Aceptar</string>
+    <string name="sleep">sleep</string>
+    <string name="recordatorios">recordatorios</string>
+    <string name="recetas">recetas</string>
+    <string name="ejercicios">ejercicios</string>
 </resources>

@@ -2,6 +2,7 @@ package mx.GPS.healthec;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,18 +15,19 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnModuloSueñoClick (){
-        startActivity(new Intent( this, SleepActivity.class));
+        Intent intent = new Intent(MenuActivity.this, SleepActivity.class);
+        startActivity(intent);
     }
 
     public void btnModuloRecetasClick (){
-        startActivity(new Intent( this, RecetasActivity.class));
+        startActivity(new Intent( MenuActivity.this, RecetasActivity.class));
     }
 
     public void btnModuloRecordatorioClick(){
-        startActivity(new Intent( this, RecetasActivity.class));
+        startActivity(new Intent( MenuActivity.this, RecordatoriosActivity.class));
     }
 
     public void btnModuloMeditacionClick(){
-        startActivity(new Intent( this, MeditacionActivity.class));
+        startActivity(new Intent( MenuActivity.this, MeditacionActivity.class));
     }
 }

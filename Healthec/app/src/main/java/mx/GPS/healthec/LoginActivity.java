@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Referencia a los botones y otros controles en el layout
     Button btn_registrar, btn_ingresar;
-    EditText et_email, et_password;
+    EditText edt_email, edt_password;
     ImageView google_login;
 
     GoogleSignInOptions gso;
@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_ingresar = findViewById(R.id.btn_ingresar);
         btn_registrar = findViewById(R.id.btn_registrar);
 
-        et_email = findViewById(R.id.et_email);
-        et_password = findViewById(R.id.et_password);
+        edt_email = findViewById(R.id.edt_email);
+        edt_password = findViewById(R.id.edt_password);
 
         google_login = findViewById(R.id.google);
 
@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Si se produce una excepción, se muestra un mensaje de error y se crea una instancia de
                 // UserModel con valores predeterminados ("error" y "-1").
                 try{
-                    usuario = new UserModel(-1, et_email.getText().toString(),
-                            et_password.getText().toString());
+                    usuario = new UserModel(-1, edt_email.getText().toString(),
+                            edt_password.getText().toString());
                     Toast.makeText(LoginActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
                 } catch( Exception e){
                     Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
@@ -80,13 +80,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Se llama al método "addOne" de la instancia de DataBaseHealthec, pasando como argumento
                 // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
-                // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
-                boolean exist = dataBaseHealthec.addOne(usuario);
 
-                if( exist ){
-                    //codigo para entrar al menu principal donde se encuentran todas las opciones
-                    startActivity( new Intent(LoginActivity.this, MenuActivity.class));
-                } else {
+                // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
+                try{
+                boolean exist = dataBaseHealthec.exists(usuario);
+                    if( exist ){
+                        //codigo para entrar al menu principal donde se encuentran todas las opciones
+                        finish();
+                        startActivity( new Intent(LoginActivity.this, MenuActivity.class));
+                    }
+                } catch (Exception e){
                     //codigo para representar que el usuario no existe
                     Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
                             Toast.LENGTH_LONG).show();
