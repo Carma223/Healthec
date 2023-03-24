@@ -44,10 +44,11 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     public static final String TABLA_CONSEJOS = "TABLA_CONSEJOS";
     public static final String COLUMNA_CONSEJOS_ID = "COLUMNA_CONSEJOS_ID";
     public static final String COLUMNA_CONSEJOS_DESCRIPCION = "COLUMNA_CONSEJOS_DESCRIPCION";
+    public static final String COLUMNA_USUARIO_NOMBRE = "COLUMNA_USUARIO_NOMBRE";
 
 
     public DataBaseHealthec(@Nullable Context context) {
-        super(context, "healthec.db", null, 1);
+        super(context, "healthec.db", null, 2);
     }
 
     //Esto es llamado la primera vez que la base de datos es accedida. Aqui va el codigo para crear
@@ -55,7 +56,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Aqui se crean las tablas de la base de datos y se definen los tipos de datos de las columnas
-        String createTableUsuario = "CREATE TABLE "+ TABLA_USUARIO + " (" + COLUMNA_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_USUARIO_CORREO + " TEXT, " + COLUMNA_USUARIO_CLAVE + " TEXT)";
+        String createTableUsuario = "CREATE TABLE "+ TABLA_USUARIO + " (" + COLUMNA_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_USUARIO_NOMBRE + " TEXT, " + COLUMNA_USUARIO_CORREO + " TEXT, " + COLUMNA_USUARIO_CLAVE + " TEXT)";
         String createTableRecordatorios =  "CREATE TABLE "+ TABLA_RECORDATORIOS + " (" + COLUMNA_RECORDATORIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECORDATORIOS_MEDICO + " TEXT, " + COLUMNA_RECORDATORIOS_FECHAHORA + " TEXT,"+COLUMNA_RECORDATORIOS_CLINICA+"TEXT)";
         String createTableRecetarios = "CREATE TABLE " + TABLA_RECETARIOS + " (" + COLUMNA_RECETARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETARIOS_RECETA + " TEXT, " + COLUMNA_RECETARIOS_PASOS + " TEXT)";
         String createTableHorarioSueño = "CREATE TABLE " + TABLA_HORARIOSUEÑO + "( " + COLUMNA_HORARIOSUEÑO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_HORARIOSUEÑO_DIA + " TEXT, " + COLUMNA_HORARIOSUEÑO_HORA + " TEXT)";
@@ -78,6 +79,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
 
         ContentValues cv = new ContentValues();
 
+        cv.put(COLUMNA_USUARIO_NOMBRE, user.getNombre());
         cv.put(COLUMNA_USUARIO_CORREO, user.getEmail());
         cv.put(COLUMNA_USUARIO_CLAVE, user.getPassword());
 
@@ -91,6 +93,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     }
     //Metodo para obtener todos los registros de una tabla en una Lista.
     public List<UserModel> getEveryone() {
+
         List<UserModel> returnList = new ArrayList<>();
         //Toma la información de la db
         String queryString = "SELECT * FROM " + TABLA_USUARIO;
@@ -103,10 +106,11 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
             //Se hace un bucle a traves del cursor y crea un nuevo objeto de UserModel los cuales se pondran en la lista que se retorna.
             do{
                 int userID = cursor.getInt(0);
-                String userEmail = cursor.getString(1);
-                String userPassowrd = cursor.getString(2);
+                String userName = cursor.getString(1);
+                String userEmail = cursor.getString(2);
+                String userPassowrd = cursor.getString(3);
 
-                UserModel user = new UserModel(userID, userEmail, userPassowrd);
+                UserModel user = new UserModel(userID, userName, userEmail, userPassowrd);
                 returnList.add(user);
 
             } while (cursor.moveToNext());

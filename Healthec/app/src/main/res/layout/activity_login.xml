@@ -67,17 +67,26 @@
         android:id="@+id/btn_ingresar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/border_radius"
         android:text="Ingresar" />
 
     <Button
         android:id="@+id/btn_registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/border_radius"
         android:text="Registrarse" />
 
-    <Button
-        android:id="@+id/btn_recuperar"
+    <ImageView
+        android:id="@+id/google"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recuperar contraseña" />
+        android:layout_margin="15dp"
+        app:srcCompat="@drawable/google" />
+
 </LinearLayout>

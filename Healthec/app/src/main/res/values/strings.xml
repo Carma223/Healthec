@@ -2,4 +2,7 @@
     <string name="app_name">Healthec</string>
     <string name="UsuarioCorreo">Correo</string>
     <string name="UsuarioContraseña">Contraseña</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Aceptar">Aceptar</string>
 </resources>

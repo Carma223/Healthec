@@ -1,5 +1,6 @@
 package mx.GPS.healthec;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,13 +8,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
     //Referencia a los botones y otros controles en el layout
-    Button btn_registrar, btn_ingresar, btn_recuperar;
+    Button btn_registrar, btn_ingresar;
     EditText et_email, et_password;
+    ImageView google_login;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
 
     //METODO ONCREATE, SE EJECUTA CUNADO LOGINACTIVITY SE INICIA
@@ -28,10 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         //Se le asigna a las variables el elemento creado por la computadora en el layout---------//
         btn_ingresar = findViewById(R.id.btn_ingresar);
         btn_registrar = findViewById(R.id.btn_registrar);
-        btn_recuperar = findViewById(R.id.btn_recuperar);
 
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
+
+        google_login = findViewById(R.id.google);
 
         //Listeners de los botones----------------------------------------------------------------//
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
@@ -81,31 +95,47 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                UserModel usuario;
-                try{
-                     usuario = new UserModel(-1, et_email.getText().toString(),
-                            et_password.getText().toString());
-                    Toast.makeText(LoginActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
-                } catch( Exception e){
-                    Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
-                            Toast.LENGTH_SHORT).show();
-                    usuario = new UserModel(-1, "error", "error");
-                }
-                DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(LoginActivity.this);
-
-                boolean success = dataBaseHealthec.addOne(usuario);
-
-                Toast.makeText(LoginActivity.this, "Success= " + success, Toast.LENGTH_SHORT).show();
-
             }
         });
         //----------------------------------------------------------------------------------------//
-        btn_recuperar.setOnClickListener(new View.OnClickListener() {
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
+        google_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                SignIn();
             }
         });
 
+    }
+
+    private void SignIn() {
+        Intent intent = gsc.getSignInIntent();
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 100){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                HomeActivity();
+            } catch (ApiException e) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void HomeActivity() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(intent);
     }
 }

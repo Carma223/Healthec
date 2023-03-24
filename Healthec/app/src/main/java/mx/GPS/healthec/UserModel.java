@@ -6,23 +6,36 @@ public class UserModel {
     private int idUser;
     private String email;
     private String password;
+    private String nombre;
+
     //Constructor de la clase Usuario
-    public UserModel(int idUser, String email, String password) {
+    public UserModel(int idUser, String email, String password, String nombre) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
+        this.nombre = nombre;
     }
     //Constructor vacío de la clase usuario
     public UserModel() {
     }
 
+    //Constructor para validar
+    public UserModel(int idUser, String email, String password) {
+        this.idUser = idUser;
+        this.email = email;
+        this.password = password;
+    }
+
     //toString es necesario para imprimir el contenido de objetos de la clase
+
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "idUser=" + idUser +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 
@@ -51,5 +64,7 @@ public class UserModel {
         this.password = password;
     }
 
+    public String getNombre() { return nombre; }
 
+    public void setNombre(String nombre) { this.nombre = nombre; }
 }
