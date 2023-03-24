@@ -47,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
 
         google_login = findViewById(R.id.google);
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
         //Listeners de los botones----------------------------------------------------------------//
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,16 +100,12 @@ public class LoginActivity extends AppCompatActivity {
             // ingresados en la interfaz de usuario y agregarlo a la base de datos de la aplicación.
             @Override
             public void onClick(View view) {
-
+                finish();
+                Intent intent = new Intent(getApplicationContext(), RegistroActivity.class);
+                startActivity(intent);
             }
         });
         //----------------------------------------------------------------------------------------//
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        gsc = GoogleSignIn.getClient(this, gso);
-
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
