@@ -16,8 +16,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnModuloSueñoClick ( View v ){
-        Intent intent = new Intent(MenuActivity.this, SleepActivity.class);
-        startActivity(intent);
+        startActivity(new Intent( MenuActivity.this, SleepActivity.class));
     }
 
     public void btnModuloRecetasClick ( View v ){
