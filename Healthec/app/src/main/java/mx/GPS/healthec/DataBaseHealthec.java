@@ -123,8 +123,8 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public boolean Exists( UserModel user ){
-        String queryString = "SELECT " + COLUMNA_USUARIO_ID + " FROM " + TABLA_USUARIO + "WHERE " + COLUMNA_USUARIO_CORREO + " = " + user.getEmail() +
+    public boolean exists( UserModel user ){
+        String queryString = "SELECT " + COLUMNA_USUARIO_ID + " FROM " + TABLA_USUARIO + " WHERE " + COLUMNA_USUARIO_CORREO + " = " + user.getEmail() +
                 " AND " + COLUMNA_USUARIO_CLAVE + " = " + user.getPassword();
 
         SQLiteDatabase db = this.getReadableDatabase();
