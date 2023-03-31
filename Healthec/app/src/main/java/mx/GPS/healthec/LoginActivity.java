@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Referencia a los botones y otros controles en el layout
     Button btn_registrar, btn_ingresar;
-    EditText edt_email, edt_password;
+    EditText et_email, et_password;
     ImageView google_login;
 
     GoogleSignInOptions gso;
@@ -42,16 +42,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_ingresar = findViewById(R.id.btn_ingresar);
         btn_registrar = findViewById(R.id.btn_registrar);
 
-        edt_email = findViewById(R.id.edt_email);
-        edt_password = findViewById(R.id.edt_password);
+        et_email = findViewById(R.id.et_email);
+        et_password = findViewById(R.id.et_password);
 
         google_login = findViewById(R.id.google);
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        gsc = GoogleSignIn.getClient(this, gso);
 
         //Listeners de los botones----------------------------------------------------------------//
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Si se produce una excepción, se muestra un mensaje de error y se crea una instancia de
                 // UserModel con valores predeterminados ("error" y "-1").
                 try{
-                    usuario = new UserModel(-1, edt_email.getText().toString(),
-                            edt_password.getText().toString());
+                    usuario = new UserModel(-1, et_email.getText().toString(),
+                            et_password.getText().toString());
                     Toast.makeText(LoginActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
                 } catch( Exception e){
                     Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
@@ -80,16 +74,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Se llama al método "addOne" de la instancia de DataBaseHealthec, pasando como argumento
                 // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
-
                 // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
-                try{
-                boolean exist = dataBaseHealthec.exists(usuario);
-                    if( exist ){
-                        //codigo para entrar al menu principal donde se encuentran todas las opciones
-                        finish();
-                        startActivity( new Intent(LoginActivity.this, MenuActivity.class));
-                    }
-                } catch (Exception e){
+                boolean exist = dataBaseHealthec.addOne(usuario);
+
+                if( exist ){
+                    //codigo para entrar al menu principal donde se encuentran todas las opciones
+                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
+                } else {
                     //codigo para representar que el usuario no existe
                     Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
                             Toast.LENGTH_LONG).show();
@@ -103,12 +94,16 @@ public class LoginActivity extends AppCompatActivity {
             // ingresados en la interfaz de usuario y agregarlo a la base de datos de la aplicación.
             @Override
             public void onClick(View view) {
-                finish();
-                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(intent);
+
             }
         });
         //----------------------------------------------------------------------------------------//
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,14 +128,14 @@ public class LoginActivity extends AppCompatActivity {
                 task.getResult(ApiException.class);
                 HomeActivity();
             } catch (ApiException e) {
-                Toast.makeText(this, "Error 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void HomeActivity() {
         finish();
-        Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
     }
 }

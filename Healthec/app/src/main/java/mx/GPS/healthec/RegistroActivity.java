@@ -9,17 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
 public class RegistroActivity extends AppCompatActivity {
     Button btn_registroAceptar;
     EditText edt_emailRegistro, edt_passwordRegistro, edt_nombreRegistro;
-
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,42 +20,6 @@ public class RegistroActivity extends AppCompatActivity {
         edt_emailRegistro = findViewById(R.id.edt_correoRegistro);
         edt_passwordRegistro = findViewById(R.id.edt_correoRegistro);
         edt_nombreRegistro = findViewById(R.id.edt_correoRegistro);
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        gsc = GoogleSignIn.getClient(this, gso);
-
-        DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(RegistroActivity.this);
-
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
-        if( account != null ){
-            UserModel usuario;
-            try{
-                usuario = new UserModel(-1, account.getEmail(), null, account.getDisplayName());
-                Toast.makeText(RegistroActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception e){
-                Toast.makeText(RegistroActivity.this, "Error con la cuenta de google",
-                        Toast.LENGTH_SHORT).show();
-                usuario = new UserModel(-1, "error", "error", "error");
-            }
-
-            boolean success = dataBaseHealthec.addOne(usuario);
-
-            try{
-                if(success){
-                    finish();
-                    startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
-                }
-            }catch (Exception e){
-                Toast.makeText(RegistroActivity.this, "No se pudo registrar correctamente",
-                        Toast.LENGTH_LONG).show();
-            }
-
-        }
 
         btn_registroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,11 +35,12 @@ public class RegistroActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     usuario = new UserModel(-1, "error", "error", "error");
                 }
+                DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(RegistroActivity.this);
+
+                boolean success = dataBaseHealthec.addOne(usuario);
 
                 try{
-                boolean success = dataBaseHealthec.addOne(usuario);
                     if(success){
-                        finish();
                         startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
                     }
                 }catch (Exception e){
