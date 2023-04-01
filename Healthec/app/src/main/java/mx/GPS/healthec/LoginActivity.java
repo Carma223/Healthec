@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Se llama al método "addOne" de la instancia de DataBaseHealthec, pasando como argumento
                 // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
-
                 // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
                 try{
                 boolean exist = dataBaseHealthec.exists(usuario);

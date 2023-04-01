@@ -45,6 +45,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     public static final String COLUMNA_CONSEJOS_ID = "COLUMNA_CONSEJOS_ID";
     public static final String COLUMNA_CONSEJOS_DESCRIPCION = "COLUMNA_CONSEJOS_DESCRIPCION";
     public static final String COLUMNA_USUARIO_NOMBRE = "COLUMNA_USUARIO_NOMBRE";
+    public static final String COLUMNA_RECETARIOS_INGREDIETNES = "COLUMNA_RECETARIOS_INGREDIETNES";
 
 
     public DataBaseHealthec(@Nullable Context context) {
@@ -58,7 +59,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         //Aqui se crean las tablas de la base de datos y se definen los tipos de datos de las columnas
         String createTableUsuario = "CREATE TABLE "+ TABLA_USUARIO + " (" + COLUMNA_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_USUARIO_NOMBRE + " TEXT, " + COLUMNA_USUARIO_CORREO + " TEXT, " + COLUMNA_USUARIO_CLAVE + " TEXT)";
         String createTableRecordatorios =  "CREATE TABLE "+ TABLA_RECORDATORIOS + " (" + COLUMNA_RECORDATORIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECORDATORIOS_MEDICO + " TEXT, " + COLUMNA_RECORDATORIOS_FECHAHORA + " TEXT,"+COLUMNA_RECORDATORIOS_CLINICA+"TEXT)";
-        String createTableRecetarios = "CREATE TABLE " + TABLA_RECETARIOS + " (" + COLUMNA_RECETARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETARIOS_RECETA + " TEXT, " + COLUMNA_RECETARIOS_PASOS + " TEXT)";
+        String createTableRecetarios = "CREATE TABLE " + TABLA_RECETARIOS + " (" + COLUMNA_RECETARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETARIOS_RECETA + " TEXT, " + COLUMNA_RECETARIOS_PASOS + " TEXT, " + COLUMNA_RECETARIOS_INGREDIETNES + " TEXT)";
         String createTableHorarioSueño = "CREATE TABLE " + TABLA_HORARIOSUEÑO + "( " + COLUMNA_HORARIOSUEÑO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_HORARIOSUEÑO_DIA + " TEXT, " + COLUMNA_HORARIOSUEÑO_HORA + " TEXT)";
         String createTableConsejos = "CREATE TABLE " + TABLA_CONSEJOS + " (" + COLUMNA_CONSEJOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_CONSEJOS_DESCRIPCION + " TEXT)";
         db.execSQL(createTableUsuario);
@@ -70,7 +71,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     //Este metodo es llamado si la version de la base de datos cambia. Previene que los usuarios que
     //tengan una version anterior de la bd creasheen cuando se hacen cambios a la db
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 
@@ -92,7 +93,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
 
     }
     //Metodo para obtener todos los registros de una tabla en una Lista.
-    public List<UserModel> getEveryone() {
+    public List<UserModel> getUsuarios() {
 
         List<UserModel> returnList = new ArrayList<>();
         //Toma la información de la db
@@ -142,5 +143,33 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         db.close();
 
         return exist;
+    }
+
+    public List<RecetasModel> getRecipes(){
+        List<RecetasModel> returnList = new ArrayList<>();
+        //obtiene la información de la base de datos
+        String queryString = "SELECT " + COLUMNA_RECETARIOS_INGREDIETNES + " FROM " + TABLA_RECETARIOS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()){
+            //Se hace un bucle a traves del cursor y crea un nuevo objeto de UserModel los cuales se pondran en la lista que se retorna.
+            do{
+                int recetaID = cursor.getInt(0);
+                String recetaNombre = cursor.getString(1);
+                String recetaPasos = cursor.getString(2);
+                String recetaIngredientes = cursor.getString(3);
+
+                RecetasModel receta = new RecetasModel(recetaID, recetaNombre, recetaPasos, recetaIngredientes);
+                returnList.add(receta);
+
+            } while (cursor.moveToNext());
+        } else {
+            //Fallo, no anade nada a la lista
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
     }
 }
