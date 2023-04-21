@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoMeditacion"
+    android:orientation="vertical"
     tools:context=".MeditacionActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="336dp"
+            android:layout_height="48dp"
+            android:foreground="@drawable/btnSueño"
+            android:text="Button"
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="289dp" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="336dp"
+            android:layout_height="45dp"
+            android:foreground="@drawable/btnAnsiedad"
+            android:text="Button"
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="366dp" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="329dp"
+            android:layout_height="55dp"
+            android:foreground="@drawable/btnRelajacion"
+            android:text="Button"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="443dp" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="322dp"
+            android:layout_height="49dp"
+            android:foreground="@drawable/btnSobrepensamiento"
+            android:text="Button"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="520dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
