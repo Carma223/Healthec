@@ -4,30 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#FFF6E8"
     android:backgroundTint="#FFF6E8"
     android:orientation="vertical"
     tools:context=".RecetasActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ADE3EA"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Regresar" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="¿Qué hay en tu nevera?"
-            android:textAlignment="center" />
-    </LinearLayout>
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="¿Qué hay en tu nevera?"
+        android:textAlignment="center" />
 
     <SearchView
         android:layout_width="match_parent"
@@ -37,5 +26,13 @@
     <ListView
         android:id="@+id/lv_recetas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_ConsejosSaludables"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F6DDB9"
+        android:text="Consejos Saludables" />
 </LinearLayout>

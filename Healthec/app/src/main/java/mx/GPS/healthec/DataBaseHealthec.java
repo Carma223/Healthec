@@ -133,7 +133,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
         boolean exist;
 
-        if( cursor.moveToFirst()){
+        if( cursor.moveToFirst() ){
             exist = true;
         } else {
             exist = false;
