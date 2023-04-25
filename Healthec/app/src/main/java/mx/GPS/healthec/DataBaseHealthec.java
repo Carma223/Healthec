@@ -49,7 +49,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
 
 
     public DataBaseHealthec(@Nullable Context context) {
-        super(context, "healthec.db", null, 2);
+        super(context, "healthec.db", null, 1);
     }
 
     //Esto es llamado la primera vez que la base de datos es accedida. Aqui va el codigo para crear
@@ -133,7 +133,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
         boolean exist;
 
-        if( cursor.moveToFirst()){
+        if (cursor != null && cursor.getCount() > 0) {
             exist = true;
         } else {
             exist = false;

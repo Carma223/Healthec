@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     usuario = new UserModel(-1, edt_email.getText().toString(),
                             edt_password.getText().toString());
-                    Toast.makeText(LoginActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
                 } catch( Exception e){
                     Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
                             Toast.LENGTH_SHORT).show();
@@ -82,8 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
                 // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
                 try{
-                boolean exist = dataBaseHealthec.exists(usuario);
-                    if( exist ){
+                    if(dataBaseHealthec.exists(usuario)){
                         //codigo para entrar al menu principal donde se encuentran todas las opciones
                         finish();
                         startActivity( new Intent(LoginActivity.this, MenuActivity.class));
