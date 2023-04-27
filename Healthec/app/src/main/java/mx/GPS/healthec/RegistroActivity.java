@@ -26,8 +26,8 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         btn_registroAceptar = findViewById(R.id.btn_registroAceptar);
         edt_emailRegistro = findViewById(R.id.edt_correoRegistro);
-        edt_passwordRegistro = findViewById(R.id.edt_correoRegistro);
-        edt_nombreRegistro = findViewById(R.id.edt_correoRegistro);
+        edt_passwordRegistro = findViewById(R.id.edt_passwordRegistro);
+        edt_nombreRegistro = findViewById(R.id.edt_nombreRegistro);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()

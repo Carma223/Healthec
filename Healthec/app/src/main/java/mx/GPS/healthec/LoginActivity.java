@@ -63,11 +63,11 @@ public class LoginActivity extends AppCompatActivity {
                 // en los campos de correo electrónico y contraseña de la interfaz de usuario.
                 // Si se produce una excepción, se muestra un mensaje de error y se crea una instancia de
                 // UserModel con valores predeterminados ("error" y "-1").
-                try{
+
+                try {
                     usuario = new UserModel(-1, edt_email.getText().toString(),
                             edt_password.getText().toString());
-                    Toast.makeText(LoginActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
-                } catch( Exception e){
+                } catch (Exception e) {
                     Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
                             Toast.LENGTH_SHORT).show();
                     usuario = new UserModel(-1, "error", "error");
@@ -81,18 +81,19 @@ public class LoginActivity extends AppCompatActivity {
                 //Se llama al método "addOne" de la instancia de DataBaseHealthec, pasando como argumento
                 // la instancia de UserModel creada anteriormente. Este método intenta agregar el usuario a
                 // la base de datos y devuelve un valor booleano que indica si la operación fue exitosa o no.
-                try{
                 boolean exist = dataBaseHealthec.exists(usuario);
-                    if( exist ){
-                        //codigo para entrar al menu principal donde se encuentran todas las opciones
-                        finish();
-                        startActivity( new Intent(LoginActivity.this, MenuActivity.class));
-                    }
-                } catch (Exception e){
+                if (exist) {
+                    //codigo para entrar al menu principal donde se encuentran todas las opciones
+                    startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                    Toast.makeText(LoginActivity.this, "Hay un error mano", Toast.LENGTH_SHORT).show();
+                    finish();
+
+                } else {
                     //codigo para representar que el usuario no existe
                     Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
                             Toast.LENGTH_LONG).show();
                 }
+
             }
         });
         //----------------------------------------------------------------------------------------//
@@ -126,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100){
+        if (requestCode == 100) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
