@@ -13,10 +13,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseRegistrar;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistroActivity extends AppCompatActivity {
     Button btn_registroAceptar;
     EditText edt_emailRegistro, edt_passwordRegistro, edt_nombreRegistro;
+
+    FirebaseDatabase database;
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -35,6 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         gsc = GoogleSignIn.getClient(this, gso);
 
+        //Bases de datos
         DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(RegistroActivity.this);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -68,10 +74,11 @@ public class RegistroActivity extends AppCompatActivity {
         btn_registroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                database = FirebaseDatabase.getInstance();
+                DatabaseReference usuariosRef = database.getReference("usuarios");
                 UserModel usuario;
                 try{
-                    usuario = new UserModel(-1, edt_nombreRegistro.getText().toString(),
-                            edt_emailRegistro.getText().toString(),
+                    usuario = new UserModel(-1,edt_emailRegistro.getText().toString(),edt_passwordRegistro.getText().toString(),
                             edt_nombreRegistro.getText().toString());
                     Toast.makeText(RegistroActivity.this, usuario.toString(), Toast.LENGTH_SHORT).show();
                 } catch( Exception e){
@@ -82,6 +89,7 @@ public class RegistroActivity extends AppCompatActivity {
 
                 try{
                 boolean success = dataBaseHealthec.addOne(usuario);
+                usuariosRef.child("usuario1").setValue(usuario);
                     if(success){
                         finish();
                         startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
