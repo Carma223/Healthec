@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="RECORDATORIO MEDICO"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/btnMedicamentos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         app:layout_constraintVertical_bias="0.288" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnMedicamentos"
         android:layout_width="160dp"
         android:layout_height="80dp"
         android:background="#F6DDB9"
@@ -76,6 +76,7 @@
         app:layout_constraintVertical_bias="0.287" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="374dp"
         android:layout_height="385dp"
         app:layout_constraintBottom_toBottomOf="parent"
