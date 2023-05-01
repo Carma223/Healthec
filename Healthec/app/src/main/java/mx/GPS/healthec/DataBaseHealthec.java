@@ -106,7 +106,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //Se hace un bucle a traves del cursor y crea un nuevo objeto de UserModel los cuales se pondran en la lista que se retorna.
             do{
-                int userID = cursor.getInt(0);
+                Long userID = cursor.getLong(0);
                 String userName = cursor.getString(1);
                 String userEmail = cursor.getString(2);
                 String userPassowrd = cursor.getString(3);

@@ -1,5 +1,6 @@
 package mx.GPS.healthec;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_registrar, btn_ingresar;
     EditText edt_email, edt_password;
     ImageView google_login;
+
+    FirebaseDatabase database;
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -57,6 +64,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                database = FirebaseDatabase.getInstance();
+                DatabaseReference usuariosRef = database.getReference("usuarios");
+
                 //SE DECLARA UNA INSTANCIA DE UserModel llamada usuario
                 UserModel usuario;
                 //Se intenta crear una nueva instancia de UserModel utilizando los valores ingresados
@@ -65,15 +76,42 @@ public class LoginActivity extends AppCompatActivity {
                 // UserModel con valores predeterminados ("error" y "-1").
 
                 try {
-                    usuario = new UserModel(-1, edt_email.getText().toString(),
+                    usuario = new UserModel(-1L, edt_email.getText().toString(),
                             edt_password.getText().toString());
                 } catch (Exception e) {
                     Toast.makeText(LoginActivity.this, "Es necesario rellenar todos los campos",
                             Toast.LENGTH_SHORT).show();
-                    usuario = new UserModel(-1, "error", "error");
+                    usuario = new UserModel(-1L, "error", "error");
                 }
 
-                //Se declara una instancia de DataBaseHealthec, que es una clase que maneja la base de datos
+
+                /*usuariosRef.orderByChild("correo_electronico").equalTo(usuario.getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot usuarioSnapshot : dataSnapshot.getChildren()) {
+                                Usuario usuario = usuarioSnapshot.getValue(Usuario.class);
+                                if (usuario.getContraseña().equals(contraseña)) {
+                                    // La autenticación fue exitosa, redirige al usuario a la pantalla principal de la aplicación
+                                } else {
+                                    // La autenticación falló, muestra un mensaje de error al usuario
+                                    Toast.makeText(LoginActivity.this, "La autenticación falló.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } else {
+                            // La autenticación falló, muestra un mensaje de error al usuario
+                            Toast.makeText(LoginActivity.this, "La autenticación falló.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Ocurrió un error al acceder a la base de datos, muestra un mensaje de error al usuario
+                        Toast.makeText(LoginActivity.this, "Ocurrió un error al acceder a la base de datos.", Toast.LENGTH_SHORT).show();
+                    }
+                }); */
+
+                /*//Se declara una instancia de DataBaseHealthec, que es una clase que maneja la base de datos
                 // SQL utilizada por la aplicación.
                 DataBaseHealthec dataBaseHealthec = new DataBaseHealthec(LoginActivity.this);
 
@@ -92,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                     //codigo para representar que el usuario no existe
                     Toast.makeText(LoginActivity.this, "No existe ninguna cuenta con esos datos",
                             Toast.LENGTH_LONG).show();
-                }
+                }*/
 
             }
         });
