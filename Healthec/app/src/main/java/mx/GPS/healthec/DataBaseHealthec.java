@@ -106,7 +106,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //Se hace un bucle a traves del cursor y crea un nuevo objeto de UserModel los cuales se pondran en la lista que se retorna.
             do{
-                int userID = cursor.getInt(0);
+                Long userID = cursor.getLong(0);
                 String userName = cursor.getString(1);
                 String userEmail = cursor.getString(2);
                 String userPassowrd = cursor.getString(3);
@@ -125,24 +125,23 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     }
 
     public boolean exists( UserModel user ){
-        String queryString = "SELECT " + COLUMNA_USUARIO_ID + " FROM " + TABLA_USUARIO + " WHERE " + COLUMNA_USUARIO_CORREO + " = " + user.getEmail() +
-                " AND " + COLUMNA_USUARIO_CLAVE + " = " + user.getPassword();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(queryString, null);
-        boolean exist;
+        String[] projection = {COLUMNA_USUARIO_ID};
+        String selection = COLUMNA_USUARIO_CORREO+" = ? AND "+COLUMNA_USUARIO_CLAVE+" = ?";
+        String[] selectionArgs = {user.getEmail(), user.getPassword()};
+        Cursor cursor = db.query(TABLA_USUARIO, projection, selection, selectionArgs, null, null, null);
 
-        if( cursor.moveToFirst()){
-            exist = true;
-        } else {
-            exist = false;
-        }
+        // Check if the cursor has any rows
+        boolean found = cursor.moveToFirst();
 
+        // Close the cursor and database connection
         cursor.close();
         db.close();
 
-        return exist;
+        // Return the boolean value
+        return found;
     }
 
     public List<RecetasModel> getRecipes(){
