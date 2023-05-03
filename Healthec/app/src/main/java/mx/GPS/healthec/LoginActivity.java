@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Si se produce una excepción, se muestra un mensaje de error y se crea una instancia de
                 // UserModel con valores predeterminados ("error" y "-1").
 
-                try {
+                try{
                     usuario = new UserModel(-1L, edt_email.getText().toString(),
                             edt_password.getText().toString());
                 } catch (Exception e) {

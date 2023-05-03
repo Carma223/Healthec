@@ -90,8 +90,7 @@ public class RegistroActivity extends AppCompatActivity {
                         }
                         currentId++; // se incrementa el id
                         //Se crea el usuario con los campos de texto del layout
-                        UserModel usuario = new UserModel(currentId, edt_emailRegistro.getText().toString(),edt_passwordRegistro.getText().toString(),
-                                    edt_nombreRegistro.getText().toString());
+                        UserModel usuario = new UserModel(currentId, edt_emailRegistro.getText().toString(),edt_passwordRegistro.getText().toString(), edt_nombreRegistro.getText().toString());
 
                         mutableData.child("lastId").setValue(currentId);//Se almacena en la tabla lasId el último id, en caso de que fuera el primero sería 1.
                         DatabaseReference userRef = ref.push(); //se utiliza el método push() para crear un nuevo nodo con una clave única dentro de la referencia ref.
