@@ -23,16 +23,9 @@
         android:layout_height="wrap_content"
         android:queryHint="Escribe algun ingrediente" />
 
-    <ListView
-        android:id="@+id/lv_recetas"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recvReceteas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/btn_ConsejosSaludables"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F6DDB9"
-        android:text="Consejos Saludables" />
 </LinearLayout>
