@@ -8,12 +8,14 @@ public class RecetasModel {
     private String pasosReceta;
 
     private String ingredientesReceta;
+    private int imagenReceta;
 
-    public RecetasModel(int idReceta, String nombreReceta, String pasosReceta, String ingredientesReceta) {
+    public RecetasModel(int idReceta, String nombreReceta, String pasosReceta, String ingredientesReceta, int imagenReceta) {
         this.idReceta = idReceta;
         this.nombreReceta = nombreReceta;
         this.pasosReceta = pasosReceta;
         this.ingredientesReceta = ingredientesReceta;
+        this.imagenReceta = imagenReceta;
     }
 
     public RecetasModel() {
@@ -59,5 +61,13 @@ public class RecetasModel {
 
     public void setIngredientesReceta(String ingredientesReceta) {
         this.ingredientesReceta = ingredientesReceta;
+    }
+
+    public int getImagenReceta() {
+        return imagenReceta;
+    }
+
+    public void setImagenReceta(int imagenReceta) {
+        this.imagenReceta = imagenReceta;
     }
 }

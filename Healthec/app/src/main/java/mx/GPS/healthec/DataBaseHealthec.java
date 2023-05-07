@@ -35,17 +35,19 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
     public static final String COLUMNA_HORARIOSUEÑO_HORA = "COLUMNA_HORARIOSUEÑO_HORA";
     //-----------------------------------------------------------------------
     //En esta parte definimos la constantes a utilizar en la tabla recetarios y sus columnas
-    public static final String TABLA_RECETARIOS = "TABLA_RECETARIOS";
-    public static final String COLUMNA_RECETARIOS_ID = "COLUMNA_RECETARIOS_ID";
-    public static final String COLUMNA_RECETARIOS_RECETA = "COLUMNA_RECETARIOS_RECETA";
-    public static final String COLUMNA_RECETARIOS_PASOS = "COLUMNA_RECETARIOS_PASOS";
+    public static final String TABLA_RECETAS = "TABLA_RECETAS";
+    public static final String COLUMNA_RECETAS_ID = "COLUMNA_RECETAS_ID";
+    public static final String COLUMNA_RECETAS_TITULO = "COLUMNA_RECETAS_TITULO";
+    public static final String COLUMNA_RECETAS_PASOS = "COLUMNA_RECETAS_PASOS";
+    public static final String COLUMNA_RECETAS_INGREDIETNES = "COLUMNA_RECETAS_INGREDIETNES";
+    public static final String COLUMNA_RECETAS_IMAGEN = "COLUMNA_RECETAS_IMAGEN";
     //-----------------------------------------------------------------------
     //En esta parte definimos la constantes a utilizar en la tabla consejos y sus columnas
     public static final String TABLA_CONSEJOS = "TABLA_CONSEJOS";
     public static final String COLUMNA_CONSEJOS_ID = "COLUMNA_CONSEJOS_ID";
     public static final String COLUMNA_CONSEJOS_DESCRIPCION = "COLUMNA_CONSEJOS_DESCRIPCION";
     public static final String COLUMNA_USUARIO_NOMBRE = "COLUMNA_USUARIO_NOMBRE";
-    public static final String COLUMNA_RECETARIOS_INGREDIETNES = "COLUMNA_RECETARIOS_INGREDIETNES";
+
 
 
     public DataBaseHealthec(@Nullable Context context) {
@@ -59,7 +61,7 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         //Aqui se crean las tablas de la base de datos y se definen los tipos de datos de las columnas
         String createTableUsuario = "CREATE TABLE "+ TABLA_USUARIO + " (" + COLUMNA_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_USUARIO_NOMBRE + " TEXT, " + COLUMNA_USUARIO_CORREO + " TEXT, " + COLUMNA_USUARIO_CLAVE + " TEXT)";
         String createTableRecordatorios =  "CREATE TABLE "+ TABLA_RECORDATORIOS + " (" + COLUMNA_RECORDATORIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECORDATORIOS_MEDICO + " TEXT, " + COLUMNA_RECORDATORIOS_FECHAHORA + " TEXT,"+COLUMNA_RECORDATORIOS_CLINICA+"TEXT)";
-        String createTableRecetarios = "CREATE TABLE " + TABLA_RECETARIOS + " (" + COLUMNA_RECETARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETARIOS_RECETA + " TEXT, " + COLUMNA_RECETARIOS_PASOS + " TEXT, " + COLUMNA_RECETARIOS_INGREDIETNES + " TEXT)";
+        String createTableRecetarios = "CREATE TABLE " + TABLA_RECETAS + " (" + COLUMNA_RECETAS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_RECETAS_TITULO + " TEXT, " + COLUMNA_RECETAS_PASOS + " TEXT, " + COLUMNA_RECETAS_INGREDIETNES + " TEXT," + COLUMNA_RECETAS_IMAGEN +"INT)";
         String createTableHorarioSueño = "CREATE TABLE " + TABLA_HORARIOSUEÑO + "( " + COLUMNA_HORARIOSUEÑO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_HORARIOSUEÑO_DIA + " TEXT, " + COLUMNA_HORARIOSUEÑO_HORA + " TEXT)";
         String createTableConsejos = "CREATE TABLE " + TABLA_CONSEJOS + " (" + COLUMNA_CONSEJOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMNA_CONSEJOS_DESCRIPCION + " TEXT)";
         db.execSQL(createTableUsuario);
@@ -145,10 +147,10 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         return exist;
     }
 
-    public List<RecetasModel> getRecipes(){
+    public List<RecetasModel> getRecetas(){
         List<RecetasModel> returnList = new ArrayList<>();
         //obtiene la información de la base de datos
-        String queryString = "SELECT " + COLUMNA_RECETARIOS_INGREDIETNES + " FROM " + TABLA_RECETARIOS;
+        String queryString = "SELECT * FROM " + TABLA_RECETAS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -159,8 +161,9 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
                 String recetaNombre = cursor.getString(1);
                 String recetaPasos = cursor.getString(2);
                 String recetaIngredientes = cursor.getString(3);
+                int recetaImagen = cursor.getInt(4);
 
-                RecetasModel receta = new RecetasModel(recetaID, recetaNombre, recetaPasos, recetaIngredientes);
+                RecetasModel receta = new RecetasModel(recetaID, recetaNombre, recetaPasos, recetaIngredientes, recetaImagen);
                 returnList.add(receta);
 
             } while (cursor.moveToNext());
@@ -172,4 +175,6 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+
 }
