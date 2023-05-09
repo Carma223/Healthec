@@ -2,7 +2,6 @@ package mx.GPS.healthec;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnModuloRecetasClick (View v){
-        startActivity(new Intent( MenuActivity.this, RecetasActivity.class));
+        startActivity(new Intent( MenuActivity.this, IngredientesActivity.class));
     }
 
     public void btnModuloRecordatorioClick(View v){

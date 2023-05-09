@@ -163,8 +163,8 @@ public class DataBaseHealthec extends SQLiteOpenHelper {
                 String recetaIngredientes = cursor.getString(3);
                 int recetaImagen = cursor.getInt(4);
 
-                RecetasModel receta = new RecetasModel(recetaID, recetaNombre, recetaPasos, recetaIngredientes, recetaImagen);
-                returnList.add(receta);
+                //RecetasModel receta = new RecetasModel(recetaID, recetaNombre, recetaPasos, recetaIngredientes, recetaImagen);
+                //returnList.add(receta);
 
             } while (cursor.moveToNext());
         } else {

@@ -2,12 +2,12 @@ package mx.GPS.healthec.modelos;
 
 public class Ingredientes {
     private String Titulo;
-    private int Imagen, Clave;
+    private int Imagen, clave;
 
     public Ingredientes(String titulo, int imagen, int clave) {
         Titulo = titulo;
         Imagen = imagen;
-        Clave = clave;
+        clave = clave;
     }
 
     public String getTitulo() {
@@ -27,10 +27,10 @@ public class Ingredientes {
     }
 
     public int getClave() {
-        return Clave;
+        return clave;
     }
 
     public void setClave(int clave) {
-        Clave = clave;
+        clave = clave;
     }
 }
