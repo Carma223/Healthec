@@ -20,76 +20,75 @@
         android:textColor="#7A6969"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editTextTime"
+    <TextView
+        android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="time"
-        android:singleLine="false"
-        android:text="18:55 "
+        android:layout_marginTop="85dp"
+        android:text="Meta de sueño actual:"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/txvMetaSueno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="#7A6969"
         android:textSize="48sp" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
+        android:id="@+id/tgbtnSleep"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:background="#F6DDB9"
         android:text="ToggleButton"
         android:textColor="#7A6969"
         android:textOff="Apagado"
         android:textOn="Encendido" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="346dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="147dp"
+            android:id="@+id/btnSleepHorario"
+            android:layout_width="140dp"
             android:layout_height="134dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="34dp"
-            android:layout_marginEnd="56dp"
-            android:layout_toStartOf="@+id/imageButton6"
+            android:layout_marginLeft="15dp"
             android:background="@null"
+            android:onClick="popTimePicker"
             android:scaleType="fitXY"
             android:src="@drawable/horario_sleep" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/btnSleepInformacion"
             android:layout_width="140dp"
-            android:layout_height="135dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="34dp"
+            android:layout_height="134dp"
             android:background="@null"
             android:scaleType="fitXY"
+            android:src="@drawable/informacion_sleep"
             tools:srcCompat="@drawable/informacion_sleep" />
-
-        <ImageButton
-            android:id="@+id/imageButton7"
-            android:layout_width="wrap_content"
-            android:layout_height="141dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="129dp"
-            android:layout_marginBottom="40dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            tools:srcCompat="@drawable/configuracion_sleep" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button7"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
-        android:background="#F6DDB9"
+        android:backgroundTint="#F6DDB9"
+        android:onClick="startService"
         android:text="Comenzar a dormir" />
+
 </LinearLayout>
