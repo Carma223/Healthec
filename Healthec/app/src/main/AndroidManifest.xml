@@ -30,6 +30,7 @@
             android:name=".MeditacionActivity"
             android:exported="false" />
         <activity
+
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
