@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SearchView;
 
@@ -25,12 +26,13 @@ import mx.GPS.healthec.modelos.Ingredientes;
 
 public class IngredientesActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     //Constantes
-    public final int [] imagenes = {0, R.drawable.tomate, R.drawable.palta,
-                                    R.drawable.fresa, R.drawable.lechuga,
+    public final int [] imagenes = {0, R.drawable.tomate, R.drawable.pasta,
+                                    R.drawable.fruta, R.drawable.ensalada,
                                     R.drawable.carne, R.drawable.pollo,
-                                    R.drawable.jalapeno, R.drawable.pez};
-    SearchView srcRecetas;
-    RecyclerView recvRecetas;
+                                    R.drawable.desayuno, R.drawable.pez,
+                                    R.drawable.postre, R.drawable.malteada};
+    SearchView srcIngredientes;
+    RecyclerView recvIngredientes;
     DatabaseReference mDatabase;
     IngredientesAdapter iAdapter;
     FirebaseFirestore mFirestore;
@@ -40,41 +42,46 @@ public class IngredientesActivity extends AppCompatActivity implements SearchVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredientes);
-        srcRecetas = findViewById(R.id.srcvIngredientes);
+        srcIngredientes = findViewById(R.id.srcvIngredientes);
 
 
-        recvRecetas = findViewById(R.id.recvIngredientes);
-        recvRecetas.setLayoutManager(new LinearLayoutManager(this));
+        recvIngredientes = findViewById(R.id.recvIngredientes);
+        recvIngredientes.setLayoutManager(new LinearLayoutManager(this));
         actualizaImagenes();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getIngredientesFromFirebase();
-        srcRecetas.setOnQueryTextListener(this);
+        srcIngredientes.setOnQueryTextListener(this);
         iAdapter = new IngredientesAdapter(mIngredientesList);
 
     }
 
     private void getIngredientesFromFirebase(){
         mDatabase.child("Ingredientes").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mIngredientesList.clear();
                 if(snapshot.exists()){
                     for(DataSnapshot ds: snapshot.getChildren()){
 
 
                         String Titulo = ds.child("Titulo").getValue().toString();
                         int Imagen = (int)(long) ds.child("Imagen").getValue();
-                        int clave = (int)(long) ds.child("clave").getValue();
-                        mIngredientesList.add(new Ingredientes(Titulo,Imagen,clave));
+                        int Clave = (int)(long) ds.child("Clave").getValue();
+                        mIngredientesList.add(new Ingredientes(Titulo,Imagen,Clave));
                     }
 
                     iAdapter = new IngredientesAdapter(mIngredientesList);
-                    recvRecetas.setAdapter(iAdapter);
+                    recvIngredientes.setAdapter(iAdapter);
+
                     iAdapter.setOnItemClickListener(new IngredientesAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(Ingredientes ingredientes) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(IngredientesActivity.this);
-                            builder.setTitle(ingredientes.getTitulo()).show();
+                            Intent intent = new Intent(IngredientesActivity.this, RecetasActivity.class);
+                            intent.putExtra("clave",ingredientes.getClave());
+                            startActivity(intent);
+
                         }
                     });
                 }
