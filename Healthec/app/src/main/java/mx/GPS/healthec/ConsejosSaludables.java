@@ -1,5 +1,7 @@
 package mx.GPS.healthec;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +11,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class ConsejosSaludables extends AppCompatActivity {
 
     TextView txtvConsejo;
@@ -17,8 +26,12 @@ public class ConsejosSaludables extends AppCompatActivity {
 
     ProgressBar prgsbImagenes;
 
+    private DatabaseReference mDataBase;
+
     static int idSwitch=1;
     static int progess = 0;
+
+    static int cont=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +40,61 @@ public class ConsejosSaludables extends AppCompatActivity {
         txtvConsejo = (TextView)findViewById( R.id.txtvConsejo );
         imgvConsejo = (ImageView) findViewById(R.id.imgvConsejo);
         prgsbImagenes = findViewById(R.id.prgsbImagenes);
+
+        mDataBase = FirebaseDatabase.getInstance().getReference();
+
+
+
+        mDataBase.child("consejos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    // String consejo = snapshot.getValue().toString();
+                    String consejo = snapshot.child(cont+"").getValue().toString();
+                    txtvConsejo.setText("Consejo :  "+ consejo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
 
     public void btnSiguienteClick (View v){
 
+
+
+        cont+=1;
+
+        if(cont >= 12)
+            cont = 1;
+
+        mDataBase.child("consejos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    // String consejo = snapshot.getValue().toString();
+                    String consejo = snapshot.child(cont+"").getValue().toString();
+                    txtvConsejo.setText("Consejo : "+ consejo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         progess+=10;
         idSwitch++;
 
-
-        txtvConsejo.setText("Hola el consejo de hoy es comer frutas y verduras te hace una persona mas saludable");
 
 
         prgsbImagenes.setProgress(progess,true);
