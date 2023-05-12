@@ -71,7 +71,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnModuloRecetasClick (View v){
-        startActivity(new Intent( MenuActivity.this, RecetasActivity.class));
+        startActivity(new Intent( MenuActivity.this, IngredientesActivity.class));
     }
 
     public void btnModuloRecordatorioClick(View v){

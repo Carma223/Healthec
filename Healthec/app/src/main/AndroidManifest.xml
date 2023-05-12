@@ -30,12 +30,14 @@
             android:name=".MeditacionActivity"
             android:exported="false" />
         <activity
-
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
             android:name=".RecetasActivity"
             android:exported="false" />
+        <activity
+            android:name=".IngredientesActivity"
+            android:exported="true"/>
         <activity
             android:name=".RecordatoriosActivity"
             android:exported="false" />
