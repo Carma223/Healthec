@@ -24,6 +24,9 @@
             android:name=".ConsejosSaludables"
             android:exported="false" />
         <activity
+            android:name=".ConciliacionSueno"
+            android:exported="true"/>
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
