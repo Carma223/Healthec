@@ -40,16 +40,13 @@
             android:exported="false" />
         <activity
             android:name=".IngredientesActivity"
-            android:exported="true"/>
+            android:exported="false"/>
         <activity
             android:name=".RecordatoriosActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroActivity"
             android:exported="false" />
-        <activity
-            android:name=".RecordatoriosActivity"
-            android:exported="true"/>
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

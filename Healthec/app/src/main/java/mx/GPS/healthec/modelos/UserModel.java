@@ -1,4 +1,4 @@
-package mx.GPS.healthec;
+package mx.GPS.healthec.modelos;
 
 public class UserModel {
 

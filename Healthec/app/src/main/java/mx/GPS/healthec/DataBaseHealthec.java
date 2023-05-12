@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.GPS.healthec.modelos.UserModel;
+
 public class DataBaseHealthec extends SQLiteOpenHelper {
 
     //En esta seccion se definen las costantes que se utilizaran para referirnos a la tabla y las columnas de la base de datos
