@@ -26,10 +26,12 @@ import com.google.firebase.database.Transaction;
 public class AcelerometerService extends Service implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
-    private long endTimeMillis, duration, awakeTime;
+    private long endTimeMillis, duration;
+    private double awakeTime;
     private String userKey;
 
     FirebaseDatabase database;
+    DatabaseReference ref;
 
     @Override
     public void onCreate() {
@@ -42,9 +44,11 @@ public class AcelerometerService extends Service implements SensorEventListener 
     public int onStartCommand(Intent intent, int flags, int startId) {
         duration = intent.getLongExtra("duration", 0);
         userKey = intent.getStringExtra("key");
-        endTimeMillis =  System.currentTimeMillis() + (duration * 1000);
+        endTimeMillis =  System.currentTimeMillis() + (5 * 1000);
         awakeTime = 0;
         sensorManager.registerListener(this, accelerometer, 1000000, 1000000);
+        database = FirebaseDatabase.getInstance();//Se crea la instancia de la base de datos.
+
         return START_NOT_STICKY;
     }
 
@@ -52,31 +56,36 @@ public class AcelerometerService extends Service implements SensorEventListener 
     public void onSensorChanged(SensorEvent event) {
         // Lógica para procesar los datos del acelerómetro+
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = event.values[0];
-            float y = event.values[1];
             float z = event.values[2];
 
             if( z < 0){
                 awakeTime++;
             }
 
-            Log.d("Healthec",Float.toString(x) + " " + Float.toString(y) +" "+ Float.toString(z) + " Awake time = " +awakeTime );
-
             if (System.currentTimeMillis() >= endTimeMillis) {
                 // Stop the service
                 sensorManager.unregisterListener(this);
-                awakeTime = awakeTime / 10;
-                float realTimeSleep = (duration - awakeTime) / 3600 ;
-                database = FirebaseDatabase.getInstance();//Se crea la instancia de la base de datos.
-                DatabaseReference ref = database.getReference().child("usuarios").child(userKey).child("RegistroSueño");
 
+                awakeTime = awakeTime / 5.5;
+
+                Log.d("Healthec", Double.toString(awakeTime));
+
+                double realTimeSleep = Math.round(Math.abs(duration - awakeTime));
+
+                String sleepTime = convertSecondsToHourMinute(realTimeSleep);
+                try{
+                    ref = database.getReference().child("usuarios").child(userKey).child("registroSueño");
+                } catch ( Exception exception){
+                    Log.d("Healthec", "No se pudo encontrar el camino de referencia");
+                    ref = database.getReference().child("sueñoPerdido");
+                }
                 ref.runTransaction(new Transaction.Handler() {
                     @NonNull
                     @Override
                     public Transaction.Result doTransaction(@NonNull MutableData currentData) {
                         DatabaseReference sleepRef = ref.push();
 
-                        sleepRef.child("TiempoDeSueño").setValue(realTimeSleep);
+                        sleepRef.child("TiempoDeSueño").setValue(sleepTime);
                         Transaction.success(currentData);
                         return null;
                     }
@@ -107,6 +116,18 @@ public class AcelerometerService extends Service implements SensorEventListener 
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    public static String convertSecondsToHourMinute(double totalSeconds) {
+        int hours = (int) (totalSeconds / 3600); // Calculate whole number of hours
+        double remainingSeconds = totalSeconds % 3600; // Calculate remaining seconds
+
+        int minutes = (int) (remainingSeconds / 60); // Calculate whole number of minutes
+        double seconds = remainingSeconds % 60; // Calculate remaining fractional seconds
+
+        String time = (hours + " hours, " + minutes + " minutes, " + seconds + " seconds");
+        return time;
+    }
+
 
 }
 
