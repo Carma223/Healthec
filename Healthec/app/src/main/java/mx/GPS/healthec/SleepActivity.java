@@ -1,5 +1,6 @@
 package mx.GPS.healthec;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -19,7 +20,19 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -30,6 +43,8 @@ public class SleepActivity extends AppCompatActivity {
     int hourSleep, minuteSleep;
 
     String savedKey, savedPassword, savedEmail;
+
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +57,47 @@ public class SleepActivity extends AppCompatActivity {
         savedEmail = prefs.getString("email", null);
         savedPassword = prefs.getString("password", null);
         savedKey = prefs.getString("key", null);
+
+        //Inicializar tabla
+        BarChart barChart = findViewById(R.id.barChart);
+
+        //Inicializar db firebase
+        database = FirebaseDatabase.getInstance();
+
+        DatabaseReference timeRef = database.getReference().child("usuarios").child(savedKey).child("registroSueño");
+
+        // Agrega un listener para detectar cambios en los datos
+        timeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Borra los datos existentes en el gráfico de barras
+                barChart.clear();
+
+                // Recorre los datos en Firebase y agrega las entradas al gráfico de barras
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                int index = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    int horas = snapshot.child("horas").getValue(Integer.class);
+                    int minutos = snapshot.child("minutos").getValue(Integer.class);
+                    entries.add(new BarEntry(index, horas));
+                    entries.add(new BarEntry(index + 1, minutos));
+                    index += 2;
+                }
+
+                // Crea el conjunto de datos y configura el gráfico de barras
+                BarDataSet dataSet = new BarDataSet(entries, "Tiempo");
+                dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                BarData barData = new BarData(dataSet);
+                barChart.setData(barData);
+                barChart.invalidate();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar el error de Firebase, si es necesario
+            }
+        });
+
 
     }
 

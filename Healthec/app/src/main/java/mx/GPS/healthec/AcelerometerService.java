@@ -72,12 +72,14 @@ public class AcelerometerService extends Service implements SensorEventListener 
 
                 double realTimeSleep = Math.round(Math.abs(duration - awakeTime));
 
-                String sleepTime = convertSecondsToHourMinute(realTimeSleep);
+                int horas = convertSecondsToHour(realTimeSleep);
+                int minutos = convertSecondsToMinutes(realTimeSleep);
+
                 try{
                     ref = database.getReference().child("usuarios").child(userKey).child("registroSueño");
                 } catch ( Exception exception){
                     Log.d("Healthec", "No se pudo encontrar el camino de referencia");
-                    ref = database.getReference().child("sueñoPerdido");
+                    ref = database.getReference().child("registroSueño");
                 }
                 ref.runTransaction(new Transaction.Handler() {
                     @NonNull
@@ -85,7 +87,9 @@ public class AcelerometerService extends Service implements SensorEventListener 
                     public Transaction.Result doTransaction(@NonNull MutableData currentData) {
                         DatabaseReference sleepRef = ref.push();
 
-                        sleepRef.child("TiempoDeSueño").setValue(sleepTime);
+                        sleepRef.child("horas").setValue(horas);
+                        sleepRef.child("minutos").setValue(minutos);
+
                         Transaction.success(currentData);
                         return null;
                     }
@@ -117,15 +121,17 @@ public class AcelerometerService extends Service implements SensorEventListener 
         return null;
     }
 
-    public static String convertSecondsToHourMinute(double totalSeconds) {
+    public static int convertSecondsToHour(double totalSeconds) {
         int hours = (int) (totalSeconds / 3600); // Calculate whole number of hours
-        double remainingSeconds = totalSeconds % 3600; // Calculate remaining seconds
 
-        int minutes = (int) (remainingSeconds / 60); // Calculate whole number of minutes
-        double seconds = remainingSeconds % 60; // Calculate remaining fractional seconds
+        return hours;
+    }
 
-        String time = (hours + " hours, " + minutes + " minutes, " + seconds + " seconds");
-        return time;
+    public static int convertSecondsToMinutes(double totalSeconds) {
+        double remainingSeconds = totalSeconds % 3600;
+        int minutes = (int) (remainingSeconds / 3600);
+
+        return minutes;
     }
 
 

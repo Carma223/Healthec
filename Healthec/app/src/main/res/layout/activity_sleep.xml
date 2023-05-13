@@ -24,7 +24,7 @@
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="15dp"
         android:text="Meta de sueño actual:"
         android:textAlignment="center" />
 
@@ -39,7 +39,7 @@
         android:id="@+id/tgbtnSleep"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="15dp"
         android:background="#F6DDB9"
         android:text="ToggleButton"
         android:textColor="#7A6969"
@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/btnSleepHorario"
@@ -63,6 +63,14 @@
             android:onClick="popTimePicker"
             android:scaleType="fitXY"
             android:src="@drawable/horario_sleep" />
+
+        <TextView
+            android:id="@+id/txvGrafica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Sueño real:"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,14 +81,11 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btnSleepInformacion"
-            android:layout_width="140dp"
-            android:layout_height="134dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/informacion_sleep"
-            tools:srcCompat="@drawable/informacion_sleep" />
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="225dp" />
+
     </LinearLayout>
 
     <Button
