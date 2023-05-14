@@ -26,6 +26,8 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
         this.listaSonidos = listaSonidos;
     }
 
+
+
     @NonNull
     @Override
     public AdaptadorSonidos.SonidoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -71,7 +73,9 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
             }
         });
 
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -94,4 +98,5 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
             btnReproducir=itemView.findViewById(R.id.btnReproducir);
         }
     }
+
 }

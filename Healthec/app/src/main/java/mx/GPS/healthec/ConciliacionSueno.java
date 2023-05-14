@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +40,12 @@ public class ConciliacionSueno extends AppCompatActivity {
 
         RecyclerView.Adapter adapter=new AdaptadorSonidos(ConciliacionSueno.this,listaSonidos);
         rvLista.setAdapter(adapter);
+        Toast.makeText(this, "Recuerda usar audifonos para una mejor experiencia", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 }

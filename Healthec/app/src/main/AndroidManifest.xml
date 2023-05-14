@@ -12,9 +12,17 @@
         android:theme="@style/Theme.Healthec"
         tools:targetApi="31">
         <activity
+            android:name=".Splash_estres"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_sueno"
+            android:exported="false" />
+        <activity
+            android:name=".AlivioEstres"
+            android:exported="true" />
+        <activity
             android:name=".ConciliacionSueno"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -23,6 +31,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,7 +52,11 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
