@@ -4,38 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTint="#FFF6E8"
+    android:background="#FFF6E8"
     android:orientation="vertical"
     tools:context=".RecetasActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ADE3EA"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Regresar" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="¿Qué hay en tu nevera?"
-            android:textAlignment="center" />
-    </LinearLayout>
+        android:text="Que puedes cocinar?"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
 
     <SearchView
+        android:id="@+id/srcvRecetas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="Escribe algun ingrediente" />
+        android:layout_height="32dp"
+        android:background="#CCC3C3" />
 
-    <ListView
-        android:id="@+id/lv_recetas"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recvRecetas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="10dp" />
 </LinearLayout>
