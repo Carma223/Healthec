@@ -54,13 +54,13 @@
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/btn_registroAccept"
+        android:id="@+id/btn_registroAceptar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/border_radius"
-        android:hint="Aceptar" />
+        android:hint="@string/Aceptar" />
 
 </LinearLayout>
