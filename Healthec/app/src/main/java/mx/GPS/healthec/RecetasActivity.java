@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.SearchView;
 
@@ -24,8 +26,7 @@ import mx.GPS.healthec.modelos.Recetas;
 
 public class RecetasActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     public final int [][] imagenes = {{0, R.drawable.spagueti, R.drawable.chilaquiles,
-                                    R.drawable.sopafid, R.drawable.enchiladaroja,
-                                    R.drawable.salsatomate},
+                                    R.drawable.sopafid, R.drawable.enchiladaroja},
                                     {0, R.drawable.pastaqueso, R.drawable.lasana,
                                      R.drawable.espaguetichipotle, R.drawable.espaguetiblanco,
                                      R.drawable.espaguetiespinaca},
@@ -46,7 +47,14 @@ public class RecetasActivity extends AppCompatActivity implements SearchView.OnQ
                                     R.drawable.panfrances},
                                     {0, R.drawable.pescadoajillo, R.drawable.pescadotalla,
                                      R.drawable.pescadoculi, R.drawable.pescadoempa,
-                                     R.drawable.pescadozar}};
+                                     R.drawable.pescadozar},
+                                    {0, R.drawable.flan, R.drawable.paylimon,
+                                     R.drawable.brownies, R.drawable.mazapan,
+                                     R.drawable.paymango},
+                                    {0, R.drawable.chocolate, R.drawable.beblimon,
+                                     R.drawable.cookie, R.drawable.matcha,
+                                     R.drawable.mani}};
+
     private int ingredienteClave;
     private RecyclerView recvRecetas;
     private SearchView srcvRecetas;
@@ -73,15 +81,26 @@ public class RecetasActivity extends AppCompatActivity implements SearchView.OnQ
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
+                    mRecetasList.clear();
                     for(DataSnapshot ds: snapshot.getChildren()){
                         String Titulo = ds.child("Titulo").getValue().toString();
                         String Descripcion = ds.child("Descripcion").getValue().toString();
                         int Imagen = (int)(long) ds.child("Imagen").getValue();
                         int Clave = (int)(long) ds.child("Clave").getValue();
-                        mRecetasList.add(new Recetas(Titulo,Descripcion,Imagen,Clave));
+                        String Url = ds.child("Url").getValue().toString();
+                        mRecetasList.add(new Recetas(Titulo,Descripcion,Imagen,Clave,Url));
                     }
                     rAdapter = new RecetasAdapter(mRecetasList);
                     recvRecetas.setAdapter(rAdapter);
+
+                    rAdapter.setOnItemClickListener(new RecetasAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Recetas recetas) {
+                            String url = recetas.getUrl();
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
             @Override

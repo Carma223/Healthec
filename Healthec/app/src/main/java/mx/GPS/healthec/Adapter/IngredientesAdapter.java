@@ -23,7 +23,7 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
     private OnItemClickListener mListener;
     private ArrayList<Ingredientes> ingredientesList;
     private  ArrayList<Ingredientes> ListOriginal;
-    DatabaseReference mDatabase;
+
     public IngredientesAdapter(ArrayList<Ingredientes> ingredientes){
         this.ingredientesList = ingredientes;
         ListOriginal = new ArrayList<>();

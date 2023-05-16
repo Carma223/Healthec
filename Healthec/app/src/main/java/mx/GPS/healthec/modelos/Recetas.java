@@ -6,11 +6,22 @@ public class Recetas {
     private int Imagen;
     private int clave;
 
-    public Recetas(String titulo, String descripcion, int imagen, int clave) {
+    private String Url;
+
+    public Recetas(String titulo, String descripcion, int imagen, int clave, String url) {
         Titulo = titulo;
         Descripcion = descripcion;
         Imagen = imagen;
         this.clave = clave;
+        Url = url;
+    }
+
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String url) {
+        Url = url;
     }
 
     public String getTitulo() {
