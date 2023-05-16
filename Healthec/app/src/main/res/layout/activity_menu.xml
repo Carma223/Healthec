@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#DD3E3E"
     android:backgroundTint="#FFF6E8"
-    tools:context=".MainActivity">
+    tools:context=".MenuActivity">
 
     <ImageButton
         android:id="@+id/imageButton4"
@@ -57,7 +57,7 @@
         app:tint="#BC9696" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgvPerfil"
         android:layout_width="110dp"
         android:layout_height="102dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +66,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.006"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/textView"
@@ -79,13 +79,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgvPerfil"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="277dp"
-        android:layout_height="33dp"
+        android:id="@+id/txtvFrase"
+        android:layout_width="276dp"
+        android:layout_height="41dp"
         android:gravity="center"
         android:text="Frase"
         android:textSize="16sp"

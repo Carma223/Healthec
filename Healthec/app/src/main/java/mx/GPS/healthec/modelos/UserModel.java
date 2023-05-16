@@ -1,15 +1,15 @@
-package mx.GPS.healthec;
+package mx.GPS.healthec.modelos;
 
 public class UserModel {
 
     //Atributos de la clase usuario
-    private int idUser;
+    private Long idUser;
     private String email;
     private String password;
     private String nombre;
 
     //Constructor de la clase Usuario
-    public UserModel(int idUser, String email, String password, String nombre) {
+    public UserModel(Long idUser, String email, String password, String nombre) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
@@ -20,7 +20,7 @@ public class UserModel {
     }
 
     //Constructor para validar
-    public UserModel(int idUser, String email, String password) {
+    public UserModel(Long idUser, String email, String password) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
@@ -40,11 +40,11 @@ public class UserModel {
     }
 
     //getters and setters de los atributos de la clase
-    public int getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
 
