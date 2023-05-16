@@ -30,4 +30,8 @@ public class MeditacionActivity extends AppCompatActivity {
     public void btnAnsiedad(View v){
         startActivity(new Intent(MeditacionActivity.this,Splash_estres.class));
     }
+
+    public void btnRelajacion(View v){
+        startActivity(new Intent(MeditacionActivity.this,SplashRelajacion.class));
+    }
 }

@@ -10,16 +10,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class Splash_sueno extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 14000;
+public class SplashRelajacion extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 6000;
     private TextView txt1;
-    private TextView txt2;
-    private static final int DELAY = 7000; // 6 segundos
+    private static final int DELAY = 6000; // 6 segundos
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_sueno);
+        setContentView(R.layout.activity_splash_relajacion);
 
         int orientation=getResources().getConfiguration().orientation;
         if(orientation== Configuration.ORIENTATION_PORTRAIT){
@@ -28,24 +28,23 @@ public class Splash_sueno extends AppCompatActivity {
         }else
             getSupportActionBar().show();
         txt1 = findViewById(R.id.txt1);
-        txt2 = findViewById(R.id.txt2);
+
 
         // Mostrar texto 1 durante 5 segundos
         txt1.setVisibility(View.VISIBLE);
-        txt2.setVisibility(View.GONE);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Ocultar texto 1 y mostrar texto 2
-                txt1.setVisibility(View.GONE);
-                txt2.setVisibility(View.VISIBLE);
+                txt1.setVisibility(View.VISIBLE);
             }
         }, DELAY);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(Splash_sueno.this, ConciliacionSueno.class);
+                Intent mainIntent = new Intent(SplashRelajacion.this, RelajacionVespertina.class);
                 startActivity(mainIntent);
                 finish();
             }

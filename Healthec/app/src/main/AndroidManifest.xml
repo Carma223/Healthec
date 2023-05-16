@@ -12,6 +12,24 @@
         android:theme="@style/Theme.Healthec"
         tools:targetApi="31">
         <activity
+            android:name=".SplashRelajacion"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoPiernas"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoEspalda"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoHombros"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientosCuello"
+            android:exported="true" />
+        <activity
+            android:name=".RelajacionVespertina"
+            android:exported="false" />
+        <activity
             android:name=".Splash_estres"
             android:exported="false" />
         <activity

@@ -1,17 +1,14 @@
 package mx.GPS.healthec;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +38,7 @@ public class AlivioEstres extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alivio_estres);
         instrucciones=findViewById(R.id.txtInstrucciones);
-        contador=findViewById(R.id.txtContador);
+        contador=findViewById(R.id.txtContador1);
         btnIniciar=findViewById(R.id.btnIniciar);
         btnReset=findViewById(R.id.btnReset);
         btnPausar=findViewById(R.id.btnPausar);
