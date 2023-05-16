@@ -4,12 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF6E8"
     android:orientation="vertical"
     tools:context=".SegundaActivity">
+
+    <ImageButton
+        android:id="@+id/ibtnAtras2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textViewNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textview" />
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:text="@string/textview"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:hint="@string/fecha_seleccionada"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <Button
+                android:id="@+id/btn_selfecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="#F6DDB9"
+                android:padding="10dp"
+                android:text="@string/seleccionar_fecha"
+                android:textColor="#000000"
+                tools:ignore="VisualLintButtonSize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_hora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:hint="@string/hora_seleccionada"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <Button
+                android:id="@+id/btn_selhora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="#F6DDB9"
+                android:padding="10dp"
+                android:text="@string/seleccionar_hora"
+                android:textColor="#000000"
+                tools:ignore="VisualLintButtonSize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_eliminar"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#F6DDB9"
+                android:text="@string/eliminar_alarma"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btn_guardar"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/guardar_alarma"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 </LinearLayout>
