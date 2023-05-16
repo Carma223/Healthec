@@ -17,10 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MenuActivity extends AppCompatActivity {
-
-    private static final String FILE_NAME = "Recordatorios.txt";
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +34,8 @@ public class MenuActivity extends AppCompatActivity {
     private DatabaseReference mDataBase;
 
     private Random azar;
+
+    private static final String FILE_NAME = "Recordatorios.txt";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
