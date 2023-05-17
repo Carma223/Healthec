@@ -52,6 +52,15 @@ public class RecetasAdapter extends RecyclerView.Adapter<RecetasAdapter.ViewHold
         holder.Titulo.setText(recetas.getTitulo());
         holder.Descripcion.setText(recetas.getDescripcion());
         holder.Imagen.setImageResource(recetas.getImagen());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mListener != null){
+                    mListener.onItemClick(recetas);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,5 +82,8 @@ public class RecetasAdapter extends RecyclerView.Adapter<RecetasAdapter.ViewHold
 
     public interface OnItemClickListener{
         void onItemClick(Recetas recetas);
+    }
+    public void setOnItemClickListener(OnItemClickListener Listener){
+        mListener = Listener;
     }
 }
