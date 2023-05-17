@@ -26,6 +26,36 @@
         <activity
             android:name=".ConciliacionSueno"
             android:exported="true"/>
+            <activity
+            android:name=".SplashRelajacion"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoPiernas"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoEspalda"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoHombros"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientosCuello"
+            android:exported="true" />
+        <activity
+            android:name=".RelajacionVespertina"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_estres"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_sueno"
+            android:exported="false" />
+        <activity
+            android:name=".AlivioEstres"
+            android:exported="true" />
+        <activity
+            android:name=".ConciliacionSueno"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -61,6 +91,10 @@
         </activity>
 
         <service android:name=".AcelerometerService"/>
+        
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

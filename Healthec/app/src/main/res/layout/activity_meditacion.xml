@@ -21,9 +21,9 @@
 
         <Button
             android:id="@+id/btnSueno"
-            android:layout_width="340dp"
+            android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="8dp"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
             android:foregroundTint="#FFF7F7"
@@ -44,10 +44,11 @@
             android:id="@+id/button7"
             android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="8dp"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
             android:foregroundTint="#FFF7F7"
+            android:onClick="btnAnsiedad"
             android:text="ALIVIO DE ANSIEDAD"
             android:textColor="#908883"
             android:textSize="16sp"
@@ -60,12 +61,13 @@
             android:layout_height="30dp" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btnRelajacion"
             android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="8dp"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
+            android:onClick="btnRelajacion"
             android:text="RELAJACION VESPERTINA"
             android:textColor="#908883"
             android:textSize="16sp"
@@ -77,19 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="345dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
-            android:backgroundTint="#F7E8D5"
-            android:backgroundTintMode="add"
-            android:text="ALIVIO DE SOBREPENSAMIENTO"
-            android:textColor="#908883"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:rippleColor="#FEF5E7"
-            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
 </LinearLayout>
