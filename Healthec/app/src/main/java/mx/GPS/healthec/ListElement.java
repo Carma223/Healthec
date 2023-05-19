@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -35,6 +37,7 @@ public class ListElement extends RecyclerView.Adapter<ListElement.EjercicioViewH
 
     @Override
     public void onBindViewHolder(final ListElement.EjercicioViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.slide));
         holder.tvNombre.setText(listaEjercicios.get(position).getNombre());
         holder.tvDesc.setText(listaEjercicios.get(position).getDescripcion());
         holder.icon.setImageResource(listaEjercicios.get(position).getImagen());
@@ -72,10 +75,12 @@ public class ListElement extends RecyclerView.Adapter<ListElement.EjercicioViewH
         ImageView icon;
         TextView tvNombre,tvDesc;
         Button btnIniciar;
+        CardView cv;
+
 
         public EjercicioViewHolder(View itemView) {
             super(itemView);
-
+            cv=itemView.findViewById(R.id.cv);
             icon=itemView.findViewById(R.id.icon);
             tvNombre=itemView.findViewById(R.id.tvNombre);
             tvDesc=itemView.findViewById(R.id.descripcion);

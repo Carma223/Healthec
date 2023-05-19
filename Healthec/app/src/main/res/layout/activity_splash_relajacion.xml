@@ -29,4 +29,17 @@
         android:textStyle="bold"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+    <Button
+        android:id="@+id/btnOmitir"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:backgroundTint="#C29995"
+        android:gravity="center"
+        android:onClick="btnOmitir"
+        android:text="Omitir"
+        android:textColor="#FEFEFE"
+        tools:ignore="TouchTargetSizeCheck"
+        android:visibility="gone"/>
+
 </LinearLayout>
