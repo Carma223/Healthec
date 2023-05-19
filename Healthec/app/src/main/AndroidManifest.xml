@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Healthec"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashRecuerda"
+            android:exported="false" />
+        <activity
+            android:name=".SplashRecordatorios"
+            android:exported="false" />
         <activity
             android:name=".SegundaActivity"
             android:exported="false" />
@@ -45,7 +52,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -20,6 +21,8 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Workmanagernoti extends Worker {
+
+    
     public Workmanagernoti(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -59,7 +62,7 @@ public class Workmanagernoti extends Worker {
             nm.createNotificationChannel(nc);
         }
 
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(),RecordatoriosActivity.class);
 
         intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_ONE_SHOT);
@@ -79,10 +82,7 @@ public class Workmanagernoti extends Worker {
         assert nm != null;
         nm.notify(idNotify,builder.build());
 
-
-
     }
-
 
 
 }

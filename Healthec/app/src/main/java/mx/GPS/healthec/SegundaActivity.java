@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
@@ -41,7 +43,6 @@ public class SegundaActivity extends AppCompatActivity {
     Button selefecha,selehora;
     TextView tvfecha,tvhora;
     Button guardar,btn_eliminar;
-    ImageButton menuBtn2;
 
     Calendar actual = Calendar.getInstance();
     Calendar calendar = Calendar.getInstance();
@@ -61,14 +62,21 @@ public class SegundaActivity extends AppCompatActivity {
         tvhora = findViewById(R.id.tv_hora);
         guardar = findViewById(R.id.btn_guardar);
         btn_eliminar = findViewById(R.id.btn_eliminar);
-        menuBtn2 = findViewById(R.id.ibtnAtras2);
+
+
+        int orientation=getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_PORTRAIT){
+            getSupportActionBar().hide();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else
+            getSupportActionBar().show();
 
         selefecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anio = actual.get(Calendar.YEAR);
-                anio = actual.get(Calendar.MONTH);
-                anio = actual.get(Calendar.DAY_OF_MONTH);
+                mes = actual.get(Calendar.MONTH);
+                dia = actual.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -91,7 +99,7 @@ public class SegundaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hora = actual.get(Calendar.HOUR_OF_DAY);
-                hora = actual.get(Calendar.MINUTE);
+                minutos = actual.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(view.getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
@@ -120,6 +128,7 @@ public class SegundaActivity extends AppCompatActivity {
 
                 Toast.makeText(SegundaActivity.this,"Alarma Guardada",Toast.LENGTH_SHORT).show();
 
+
             }
         });
 
@@ -132,14 +141,7 @@ public class SegundaActivity extends AppCompatActivity {
         });
 
 
-        menuBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Aquí se agregara el código que se ejecutará al hacer clic en el botón del menú
-                startActivity(new Intent( SegundaActivity.this, RecordatoriosActivity.class));
 
-            }
-        });
 
     }//Fin del oncreate
 

@@ -11,109 +11,87 @@
     android:orientation="vertical"
     tools:context=".RecordatoriosActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="90dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125"
-        app:srcCompat="@drawable/pildora"
-        android:contentDescription="@string/todo" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/acme"
         android:text="@string/recordatorio"
+        android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnMedicamentos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
-
-    <ImageButton
-        android:id="@+id/ibtnAtras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+        app:layout_constraintVertical_bias="0.027" />
+
 
     <Button
         android:id="@+id/btnMedicamentos"
         android:layout_width="160dp"
         android:layout_height="80dp"
-        android:background="#F6DDB9"
+        android:backgroundTint="#A0C5F7"
+        android:fontFamily="@font/acme"
         android:text="@string/medicamentos"
         android:textColor="#000000"
-        app:iconTint="#64FFDA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287"
+        app:layout_constraintVertical_bias="0.181"
         tools:ignore="TextSizeCheck,VisualLintOverlap" />
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="284dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMedicamentos"
         tools:ignore="VisualLintBounds"
         tools:layout_editor_absoluteX="-27dp">
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/acme"
             android:gravity="center"
             android:text="@string/recordatorios2"
+            android:textColor="#000000"
             android:textSize="20sp"
             tools:ignore="TextSizeCheck" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/act"
-                android:layout_width="363dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:autofillHints=""
                 android:ems="10"
+                android:fontFamily="@font/acme"
                 android:hint="@string/nuevo_recordatorio"
                 android:inputType="textPersonName"
                 tools:ignore="TouchTargetSizeCheck,VisualLintBounds" />
 
             <TextView
                 android:id="@+id/agregaract"
-                android:layout_width="39dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mas"
-                android:textColor="@color/cardview_dark_background"
+                android:textColor="#032D67"
                 android:textSize="30sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -121,6 +99,7 @@
                 android:id="@+id/lista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#D740C4FF"
                 android:scrollbars="vertical"></ListView>
         </LinearLayout>
 

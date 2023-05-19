@@ -4,15 +4,20 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.SearchView;
+
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -27,7 +32,6 @@ import java.util.List;
 
 public class RecordatoriosActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private Button miInfoBtn, citasBtn, medicamentosBtn;
-    private ImageButton menuBtn;
     private TextView titleTxt;
     private ListView list;
     private TextView agregaractividad;
@@ -73,6 +77,13 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
 
         recuperar();
 
+        int orientation=getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_PORTRAIT){
+            getSupportActionBar().hide();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else
+            getSupportActionBar().show();
+
 
         mAdapter = new  ListAdapter(RecordatoriosActivity.this, R.layout.item_row,mLista);
         list.setAdapter(mAdapter);
@@ -95,7 +106,6 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
 
         // Enlazar vistas con variables
         medicamentosBtn = findViewById(R.id.btnMedicamentos);
-        menuBtn = findViewById(R.id.ibtnAtras);
         titleTxt = findViewById(R.id.textView2);
 
 
@@ -104,29 +114,73 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
 
         btnMedicamentos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(RecordatoriosActivity.this);
-                builder.setTitle("Medicamentos")
-                        .setItems(MEDICAMENTOS, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Aquí puedes agregar la lógica para manejar la selección del usuario
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        // Definir listener para el botón del menú
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                // Aquí se agregara el código que se ejecutará al hacer clic en el botón del menú
-                startActivity(new Intent( RecordatoriosActivity.this, MenuActivity.class));
-
+                mostrarDialogoMedicamentos();
             }
         });
     }
+
+    private void mostrarDialogoMedicamentos() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(RecordatoriosActivity.this);
+        builder.setTitle("Selecciona un medicamento");
+
+        final ListView listView = new ListView(RecordatoriosActivity.this);
+        builder.setView(listView);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(RecordatoriosActivity.this, android.R.layout.simple_list_item_1, MEDICAMENTOS);
+        listView.setAdapter(adapter);
+
+        final DialogInterface.OnClickListener clickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String selectedMedicamento = adapter.getItem(which);
+                Toast.makeText(RecordatoriosActivity.this, "Has seleccionado: " + selectedMedicamento, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clickListener.onClick(null, position);
+            }
+        });
+
+        final SearchView searchView = new SearchView(RecordatoriosActivity.this);
+        builder.setCustomTitle(searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // Restaurar la lista completa de medicamentos cuando se cancela la búsqueda
+                adapter.getFilter().filter("");
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+
 
     private void recuperar(){
         boolean enco = false;
@@ -163,21 +217,6 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
     }
 
 
-
-    /*private void grabar() {
-
-        try {
-            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(nomarchivo, Activity.MODE_PRIVATE));
-            archivo.write(actividad.getText().toString());
-            archivo.flush();
-            archivo.close();
-        } catch (IOException e){
-
-        }
-        Toast mensaje = Toast.makeText(this, "Los Datos Fueron Grabados",Toast.LENGTH_SHORT);
-        mensaje.show();
-    }*/
-
     private void grabar() {
         try {
             OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(nomarchivo, Activity.MODE_APPEND));  // Utiliza MODE_APPEND para agregar contenido al final del archivo
@@ -193,7 +232,7 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
     }
 
 
-    private void grabarEliminar() {
+    public void grabarEliminar() {
         if (nomarchivo == null) {
             nomarchivo = "Recordatorios.txt"; // Valor predeterminado
         }
@@ -211,26 +250,14 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
         }
     }
 
-
-
-   /* @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this,"Actividad seleccionada:"+position,Toast.LENGTH_SHORT).show();
-        Intent intent= new Intent(this,SegundaActivity.class);
-        //intent.putExtra("nombre", mAdapter.getItem(position).getNombreActividad());
-
-        intent.putExtra("nombre", mAdapter.getItem(position).getNombreactividad());
-        //startActivity(intent);
-        startActivityForResult(intent,1);
-    }*/
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Actividad seleccionada: " + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, SegundaActivity.class);
-        intent.putExtra("nombre", mAdapter.getItem(position).getNombreactividad());
-        startActivityForResult(intent, 1);
+        String nombreActividad = mAdapter.getItem(position).getNombreactividad();
+        Intent splashIntent = new Intent(this, SplashRecuerda.class);
+        splashIntent.putExtra("nombre", nombreActividad);
+        startActivityForResult(splashIntent, 1);
     }
+
 
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         eliminarElementoPorLongClick(position);
@@ -263,8 +290,6 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
                 .create()
                 .show();
     }
-
-
 
 }
 
