@@ -21,7 +21,7 @@
             android:name=".SplashRecuerda"
             android:exported="false" />
         <activity
-            android:name=".SplashRecordatorios"
+            android:name=".MenuActivity"
             android:exported="false" />
         <activity
             android:name=".SleepActivity"
@@ -32,7 +32,7 @@
         <activity
             android:name=".ConsejosSaludables"
             android:exported="false" />
-        <activity
+            <activity
             android:name=".SplashRelajacion"
             android:exported="false"
             android:noHistory="true"/>
@@ -54,7 +54,6 @@
             android:noHistory="true"/>
         <activity
             android:name=".Splash_estres"
-            android:exported="false"
             android:noHistory="true"/>
         <activity
             android:name=".Splash_sueno"
@@ -75,8 +74,8 @@
             android:name=".MeditacionActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
-            android:exported="false" />
+            android:name=".SplashRecordatorios"
+            android:exported="true" />
         <activity
             android:name=".RecetasActivity"
             android:exported="false" />
@@ -91,11 +90,9 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

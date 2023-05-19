@@ -27,20 +27,32 @@ import java.util.Random;
 
 public class MenuActivity extends AppCompatActivity {
 
+
     private ImageView perfil;
+
+    private static final String FILE_NAME = "Recordatorios.txt";
+    private TextView textView4;
+
 
     private TextView txtvFrase;
 
     private DatabaseReference mDataBase;
 
     private Random azar;
-
-    private static final String FILE_NAME = "Recordatorios.txt";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        textView4 = findViewById(R.id.textView4);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTextView();
+    }
+    private void updateTextView() {
         // Lee el contenido del archivo de texto
         String contenidoArchivo = readTextFile();
 
@@ -52,7 +64,6 @@ public class MenuActivity extends AppCompatActivity {
         }
 
         // Asigna el primer recordatorio al TextView o muestra un mensaje predeterminado
-        TextView textView4 = findViewById(R.id.textView4);
         if (!primerRecordatorio.isEmpty()) {
             textView4.setText(primerRecordatorio);
         } else {
@@ -101,7 +112,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnModuloRecordatorioClick(View v){
-        startActivity(new Intent( MenuActivity.this, RecordatoriosActivity.class));
+        startActivity(new Intent( MenuActivity.this, SplashRecordatorios.class));
     }
 
     public void btnModuloMeditacionClick(View v){

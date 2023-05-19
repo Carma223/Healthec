@@ -71,7 +71,7 @@ public class Workmanagernoti extends Worker {
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(t)
                 .setTicker("Nueva Notificacion")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.reloj)
                 .setContentText(d)
                 .setContentIntent(pendingIntent)
                 .setContentInfo("nuevo");
