@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="25dp"
-        app:srcCompat="@drawable/healthec_logo" />
+        app:srcCompat="@drawable/healthtec_logo" />
 
     <TextView
         android:id="@+id/textView"
