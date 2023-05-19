@@ -37,7 +37,8 @@
             android:exported="true"/>
             <activity
             android:name=".SplashRelajacion"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".EstiramientoPiernas"
             android:exported="false" />
@@ -52,19 +53,24 @@
             android:exported="true" />
         <activity
             android:name=".RelajacionVespertina"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".Splash_estres"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".Splash_sueno"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".AlivioEstres"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".ConciliacionSueno"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="false" />

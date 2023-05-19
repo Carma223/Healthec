@@ -30,6 +30,11 @@
         android:textSize="24sp"
         android:textStyle="bold|italic"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="118dp" />
+
     <TextView
         android:id="@+id/txt2"
         android:layout_width="match_parent"
@@ -48,5 +53,18 @@
         android:textSize="24sp"
         android:textStyle="bold|italic"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnOmitir"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:backgroundTint="#5B4C4B"
+        android:gravity="center"
+        android:onClick="btnOmitir"
+        android:text="Omitir"
+        android:textColor="#FEFEFE"
+        tools:ignore="TouchTargetSizeCheck"
         android:visibility="gone"/>
 </LinearLayout>

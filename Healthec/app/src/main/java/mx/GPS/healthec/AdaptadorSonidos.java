@@ -6,11 +6,13 @@ import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
 
     @Override
     public void onBindViewHolder(final AdaptadorSonidos.SonidoViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.slide));
         holder.tvNombre.setText(listaSonidos.get(position).getNombre());
         holder.tvDesc.setText(listaSonidos.get(position).getDescripcion());
         holder.btnReproducir.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +90,11 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
         ImageView icon;
         TextView tvNombre,tvDesc;
         Button btnReproducir,btnDetener;
+        CardView cv;
 
         public SonidoViewHolder(View itemView) {
             super(itemView);
-
+            cv=itemView.findViewById(R.id.cv);
             icon=itemView.findViewById(R.id.icon);
             tvNombre=itemView.findViewById(R.id.tvNombre);
             tvDesc=itemView.findViewById(R.id.descripcion);

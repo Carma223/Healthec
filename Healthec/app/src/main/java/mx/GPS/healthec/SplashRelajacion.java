@@ -8,16 +8,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class SplashRelajacion extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 6000;
     private TextView txt1;
-    private static final int DELAY = 6000; // 6 segundos
+    Button btnOmitir;
+    private Handler handler;
+    private Runnable runnable;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent mainIntent = new Intent(SplashRelajacion.this, RelajacionVespertina.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_relajacion);
 
@@ -28,26 +34,57 @@ public class SplashRelajacion extends AppCompatActivity {
         }else
             getSupportActionBar().show();
         txt1 = findViewById(R.id.txt1);
-
-
-        // Mostrar texto 1 durante 5 segundos
-        txt1.setVisibility(View.VISIBLE);
-
-        new Handler().postDelayed(new Runnable() {
+        btnOmitir = findViewById(R.id.btnOmitir);
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
-                // Ocultar texto 1 y mostrar texto 2
                 txt1.setVisibility(View.VISIBLE);
             }
-        }, DELAY);
+        };
+        handler.postDelayed(runnable, SPLASH_TIME_OUT);
+        handler.removeCallbacks(runnable);
 
-        new Handler().postDelayed(new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashRelajacion.this, RelajacionVespertina.class);
-                startActivity(mainIntent);
-                finish();
+                btnOmitir.setVisibility(View.VISIBLE);
+                startAnimation();
             }
-        }, SPLASH_TIME_OUT);
+        };
+        handler.postDelayed(runnable, 3000);
+
+        btnOmitir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(mainIntent);
+            }
+        });
+
+    }
+
+    private void startAnimation() {
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide);
+        btnOmitir.startAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // La animación ha comenzado
+                animation.start();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // La animación ha terminado
+                animation.cancel();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // La animación se repite
+                animation.reset();
+            }
+        });
     }
 }

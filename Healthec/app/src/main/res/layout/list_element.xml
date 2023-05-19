@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
+        android:background="@drawable/cardfondo2"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -78,7 +79,7 @@
                         android:id="@+id/btnReproducir"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#303034"
+                        android:backgroundTint="#5B4C4B"
                         android:text="Reproducir"
                         android:textColor="#FEFEFE"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -91,7 +92,7 @@
                         android:id="@+id/btnDetener"
                         android:layout_width="117dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#303034"
+                        android:backgroundTint="#5B4C4B"
                         android:text="Detener"
                         android:textColor="#FAFCFF" />
 

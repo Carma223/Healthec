@@ -10,7 +10,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="507dp" />
+        android:layout_height="401dp" />
 
     <TextView
         android:id="@+id/txt1"
@@ -50,5 +50,18 @@
         android:textStyle="bold"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnOmitir"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:backgroundTint="#024952"
+        android:gravity="center"
+        android:onClick="btnOmitir"
+        android:text="Omitir"
+        android:textColor="#C9CDDD"
+        tools:ignore="TouchTargetSizeCheck"
+        android:visibility="gone"/>
 
 </LinearLayout>
