@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <!--android:name=".item_row"-->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,31 +24,75 @@
             android:name=".SplashRecordatorios"
             android:exported="false" />
         <activity
+            android:name=".SleepActivity"
+            android:exported="false" />
+        <activity
             android:name=".SegundaActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ConsejosSaludables"
+            android:exported="false" />
+        <activity
+            android:name=".ConciliacionSueno"
+            android:exported="true"/>
+            <activity
+            android:name=".SplashRelajacion"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoPiernas"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoEspalda"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientoHombros"
+            android:exported="false" />
+        <activity
+            android:name=".EstiramientosCuello"
             android:exported="true" />
+        <activity
+            android:name=".RelajacionVespertina"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_estres"
+            android:exported="false" />
+        <activity
+            android:name=".Splash_sueno"
+            android:exported="false" />
+        <activity
+            android:name=".AlivioEstres"
+            android:exported="true" />
+        <activity
+            android:name=".ConciliacionSueno"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".MeditacionActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".RecetasActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
-            android:name=".RegistroActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SleepActivity"
-            android:exported="true" />
+            android:name=".IngredientesActivity"
+            android:exported="false"/>
         <activity
             android:name=".RecordatoriosActivity"
             android:exported="true" />
         <activity
+            android:name=".RegistroActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,6 +100,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".AcelerometerService"/>
+        
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
