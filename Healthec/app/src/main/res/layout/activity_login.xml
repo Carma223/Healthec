@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imgvPerfil"
+        android:id="@+id/imageView"
         android:layout_width="369dp"
         android:layout_height="292dp"
         android:layout_gravity="center"
