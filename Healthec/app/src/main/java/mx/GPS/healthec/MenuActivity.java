@@ -108,6 +108,10 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent( MenuActivity.this, MeditacionActivity.class));
     }
 
+    public void btnFraseClick (View v){
+        Intent intent = new Intent(MenuActivity.this, ConsejosSaludables.class);
+        startActivity(intent);
+    }
     private String readTextFile() {
         StringBuilder stringBuilder = new StringBuilder();
         try {

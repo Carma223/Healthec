@@ -87,6 +87,7 @@
         android:layout_width="276dp"
         android:layout_height="41dp"
         android:gravity="center"
+        android:onClick="btnFraseClick"
         android:text="Frase"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton"
