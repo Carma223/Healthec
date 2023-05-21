@@ -70,7 +70,7 @@
 
         <Button
             android:id="@+id/btnReset"
-            android:layout_width="162dp"
+            android:layout_width="196dp"
             android:layout_height="72dp"
             android:layout_gravity="center"
             android:backgroundTint="#024952"
