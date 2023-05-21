@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoapp"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imgvPerfil"
@@ -19,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/comfortaa"
         android:text="Healthec"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -43,7 +45,8 @@
                 android:ems="10"
                 android:hint="@string/UsuarioCorreo"
                 android:inputType="textPersonName"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#000000" />
         </TableRow>
 
         <TableRow
@@ -58,7 +61,8 @@
                 android:ems="10"
                 android:hint="@string/UsuarioContraseña"
                 android:inputType="textPassword"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#000000" />
         </TableRow>
 
     </TableLayout>
@@ -70,7 +74,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/border_radius"
-        android:text="Ingresar" />
+        android:text="INGRESAR"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_registrar"
@@ -80,10 +85,15 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/border_radius"
-        android:text="Registrarse" />
+        android:backgroundTintMode="multiply"
+        android:drawableTintMode="multiply"
+        android:foregroundTintMode="multiply"
+        android:text="Registrarse"
+        app:iconTintMode="multiply" />
 
     <ImageView
         android:id="@+id/google"
+        style="@style/TextAppearance.Compat.Notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"

@@ -17,16 +17,18 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="284dp" />
+            android:layout_height="309dp" />
 
         <Button
             android:id="@+id/btnSueno"
             android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
+            android:fontFamily="sans-serif-black"
             android:foregroundTint="#FFF7F7"
+            android:gravity="center"
             android:onClick="btnSueño"
             android:text="Conciliacion del sueño"
             android:textColor="#908883"
@@ -44,7 +46,7 @@
             android:id="@+id/button7"
             android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
             android:foregroundTint="#FFF7F7"
@@ -64,7 +66,7 @@
             android:id="@+id/btnRelajacion"
             android:layout_width="345dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
             android:backgroundTint="#F7E8D5"
             android:backgroundTintMode="add"
             android:onClick="btnRelajacion"
