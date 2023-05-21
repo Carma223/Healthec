@@ -40,6 +40,7 @@ public class SplashRelajacion extends AppCompatActivity {
             @Override
             public void run() {
                 txt1.setVisibility(View.VISIBLE);
+                startActivity(mainIntent);
             }
         };
         handler.postDelayed(runnable, SPLASH_TIME_OUT);
