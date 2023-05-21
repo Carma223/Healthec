@@ -21,8 +21,7 @@ public class Splash_estres extends AppCompatActivity {
     Button btnOmitir;
     private Handler handler;
     private Runnable runnable;
-
-
+    //-------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent mainIntent = new Intent(Splash_estres.this, AlivioEstres.class);
@@ -33,15 +32,17 @@ public class Splash_estres extends AppCompatActivity {
         } else
             getSupportActionBar().show();
         super.onCreate(savedInstanceState);
+        //asigna referencias de vistas
         setContentView(R.layout.activity_splash_estres);
         txt1 = findViewById(R.id.txt1);
         txt2 = findViewById(R.id.txt2);
         btnOmitir = findViewById(R.id.btnOmitir);
-
-        // Mostrar texto 1 durante 5 segundos
+        //establece la visibilidad de los textView
         txt1.setVisibility(View.VISIBLE);
         txt2.setVisibility(View.GONE);
 
+        //-------------------------------------------------------------------------
+        //en esta parte establece que a los 5 segundos de iniciar la actividad los text view cambiaran su visibilidad
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -51,7 +52,8 @@ public class Splash_estres extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, DELAY);
-
+        //-------------------------------------------------------------------------
+        //establece que al terminar el tiempo del splash se inicia una actividad que es MainIntent
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -61,7 +63,8 @@ public class Splash_estres extends AppCompatActivity {
         };
         handler.postDelayed(runnable, SPLASH_TIME_OUT);
         handler.removeCallbacks(runnable);
-
+        //-------------------------------------------------------------------------
+       //Establece que el boton aparecera a los 3 segundos de iniciar la actividad
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -70,7 +73,7 @@ public class Splash_estres extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, 3000);
-
+        //-------------------------------------------------------------------------
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +81,7 @@ public class Splash_estres extends AppCompatActivity {
             }
         });
     }
-
+    //-------------------------------------------------------------------------
     private void startAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide);
         btnOmitir.startAnimation(animation);

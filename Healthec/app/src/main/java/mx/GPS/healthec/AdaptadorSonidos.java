@@ -22,22 +22,22 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
     MediaPlayer mediaPlayer;
     Context context;
     List<Sonido> listaSonidos;
-
+    //-------------------------------------------------------------------------
     public AdaptadorSonidos(Context context, List<Sonido> listaSonidos) {
         this.context = context;
         this.listaSonidos = listaSonidos;
     }
-
-
-
+    //-------------------------------------------------------------------------
     @NonNull
     @Override
+    //El método responsable de inflar el diseño de cada elemento en RecyclerView.
     public AdaptadorSonidos.SonidoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_element,parent,false);
         return new SonidoViewHolder(v);
     }
-
+    //-------------------------------------------------------------------------
     @Override
+    //RecyclerView lo llama cuando necesita enlazar datos a un elemento determinado de la lista
     public void onBindViewHolder(final AdaptadorSonidos.SonidoViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.slide));
         holder.tvNombre.setText(listaSonidos.get(position).getNombre());
@@ -75,23 +75,21 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
                 mediaPlayer.stop();
             }
         });
-
-
     }
-
-
+    //-------------------------------------------------------------------------
     @Override
     public int getItemCount() {
         return listaSonidos.size();
     }
-
+    //-------------------------------------------------------------------------
+    //La clase es una implementación personalizada de ViewHolder que contiene referencias a las vistas de cada elemento de RecyclerView
     public class SonidoViewHolder extends RecyclerView.ViewHolder {
 
         ImageView icon;
         TextView tvNombre,tvDesc;
         Button btnReproducir,btnDetener;
         CardView cv;
-
+        //-------------------------------------------------------------------------
         public SonidoViewHolder(View itemView) {
             super(itemView);
             cv=itemView.findViewById(R.id.cv);

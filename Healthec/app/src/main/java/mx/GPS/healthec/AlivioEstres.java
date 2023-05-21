@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class AlivioEstres extends AppCompatActivity {
-    long START_TIME_IN_MILLIS = 320000;
+    long START_TIME_IN_MILLIS = 320000; //Establece el tiempo total del timer
     Button btnIniciar;
     TextView contador,instrucciones;
     CountDownTimer tiempo;
@@ -37,6 +37,8 @@ public class AlivioEstres extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alivio_estres);
+
+        //Asigna referencias de vistas y crea instancias de objetos MediaPlayer
         instrucciones=findViewById(R.id.txtInstrucciones);
         contador=findViewById(R.id.txtContador1);
         btnIniciar=findViewById(R.id.btnIniciar);
@@ -45,10 +47,11 @@ public class AlivioEstres extends AppCompatActivity {
         bell=MediaPlayer.create(this,R.raw.bell);
         bell.setVolume(0.1f,0.1f);
         respiracion=MediaPlayer.create(this,R.raw.respiracion);
-
+        //-------------------------------------------------------------------------
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se inicializa el timer, asi como tambien se reproducen los dos MediaPlayer creados
                     startTimer();
                     bell.start();
                     respiracion.start();
@@ -56,17 +59,21 @@ public class AlivioEstres extends AppCompatActivity {
 
             }
         });
+        //-------------------------------------------------------------------------
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se reinicia el timer asi como tambien los objectos MediaPlayer
                 resetTimer();
                 bell.seekTo(0);
                 respiracion.seekTo(0);
             }
         });
+        //-------------------------------------------------------------------------
         btnPausar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se pausa el timer y los objectos MediaPlayer
                 pauseTimer();
                 bell.pause();
                 respiracion.pause();
@@ -74,7 +81,7 @@ public class AlivioEstres extends AppCompatActivity {
             }
         });
 
-        updateCountDownText();
+        updateCountDownText(); //Se actualiza el timer
     }
 
     private void startTimer() {

@@ -22,16 +22,20 @@ public class MeditacionActivity extends AppCompatActivity {
         }else
             getSupportActionBar().show();
     }
-
+    //-------------------------------------------------------------------------
     public void btnSueño(View v){
+        // Inicia una nueva actividad en Android utilizando un objeto Intent.
         startActivity(new Intent(MeditacionActivity.this,Splash_sueno.class));
     }
 
+
     public void btnAnsiedad(View v){
+        // Inicia una nueva actividad en Android utilizando un objeto Intent.
         startActivity(new Intent(MeditacionActivity.this,Splash_estres.class));
     }
-
+    //-------------------------------------------------------------------------
     public void btnRelajacion(View v){
+        // Inicia una nueva actividad en Android utilizando un objeto Intent.
         startActivity(new Intent(MeditacionActivity.this,SplashRelajacion.class));
     }
 }

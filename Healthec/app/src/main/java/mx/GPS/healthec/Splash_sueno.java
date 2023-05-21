@@ -14,30 +14,29 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Splash_sueno extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 14000;
+    private static int SPLASH_TIME_OUT = 14000;//14 segundos
     private TextView txt1;
     private TextView txt2;
-    private static final int DELAY = 7000; // 6 segundos
+    private static final int DELAY = 7000; // 7 segundos
     Button btnOmitir;
     private Handler handler;
     private Runnable runnable;
-
-
-
+    //-------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_sueno);
         Intent mainIntent = new Intent(Splash_sueno.this, ConciliacionSueno.class);
-
+        //asigna referencias de vistas
         txt1 = findViewById(R.id.txt1);
         txt2 = findViewById(R.id.txt2);
         btnOmitir = findViewById(R.id.btnOmitir);
-
+        //establece la visibilidad de los textView
         txt1.setVisibility(View.VISIBLE);
         txt2.setVisibility(View.GONE);
 
-
+        //-------------------------------------------------------------------------
+        //en esta parte establece que a los 7 segundos de iniciar la actividad los text view cambiaran su visibilidad
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -47,7 +46,8 @@ public class Splash_sueno extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable,DELAY);
-
+        //-------------------------------------------------------------------------
+        //establece que al terminar el tiempo del splash se inicia una actividad que es MainIntent
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -57,7 +57,8 @@ public class Splash_sueno extends AppCompatActivity {
         };
         handler.postDelayed(runnable,SPLASH_TIME_OUT);
         handler.removeCallbacks(runnable);
-
+        //-------------------------------------------------------------------------
+        //Establece que el boton aparecera a los 3 segundos de iniciar la actividad
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -66,17 +67,14 @@ public class Splash_sueno extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable,3000);
-
-
-
-
+        //-------------------------------------------------------------------------
         int orientation=getResources().getConfiguration().orientation;
         if(orientation== Configuration.ORIENTATION_PORTRAIT){
             getSupportActionBar().hide();
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }else
             getSupportActionBar().show();
-
+        //-------------------------------------------------------------------------
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +82,7 @@ public class Splash_sueno extends AppCompatActivity {
             }
         });
     }
-
+    //-------------------------------------------------------------------------
     private void startAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide);
         btnOmitir.startAnimation(animation);

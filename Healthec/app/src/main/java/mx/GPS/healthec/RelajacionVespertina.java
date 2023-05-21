@@ -31,9 +31,11 @@ public class RelajacionVespertina extends AppCompatActivity {
         }else
             getSupportActionBar().show();
 
+        //asigna referencias de vistas y se configura el layoutManager de el recycler view para utilizar un GridLayoutManager con una sola columna
         rvlista=findViewById(R.id.rvlista);
         rvlista.setLayoutManager(new GridLayoutManager(this,1));
 
+        //Añade elementos a la lista ejercicio, la cual tiene como atributos, nombre, ejericio, descripcion
         listaEjercicio=new ArrayList<>();
         listaEjercicio.add(new Ejercicio("Cuello",R.drawable.cuello, "Estos estiramiento de cuello ayuda a aliviar la tensión y rigidez en los músculos del cuello, mejorando la flexibilidad y la circulación sanguínea."));
         listaEjercicio.add(new Ejercicio("Hombros",R.drawable.hombros,"Estos estiramiento de hombros alivia la tensión y rigidez en los músculos del hombro, mejorando la flexibilidad y reduciendo el dolor y la incomodidad."));
@@ -44,4 +46,9 @@ public class RelajacionVespertina extends AppCompatActivity {
         rvlista.setAdapter(adapter);
 
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 }

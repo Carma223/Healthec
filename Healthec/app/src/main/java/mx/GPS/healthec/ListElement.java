@@ -30,12 +30,14 @@ public class ListElement extends RecyclerView.Adapter<ListElement.EjercicioViewH
 
     @NonNull
     @Override
+    //El método responsable de inflar el diseño de cada elemento en RecyclerView.
     public ListElement.EjercicioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_element2,parent,false);
         return new EjercicioViewHolder(v);
     }
 
     @Override
+    //RecyclerView lo llama cuando necesita enlazar datos a un elemento determinado de la lista
     public void onBindViewHolder(final ListElement.EjercicioViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context,R.anim.slide));
         holder.tvNombre.setText(listaEjercicios.get(position).getNombre());
@@ -69,7 +71,7 @@ public class ListElement extends RecyclerView.Adapter<ListElement.EjercicioViewH
     public int getItemCount() {
         return listaEjercicios.size();
     }
-
+    //La clase es una implementación personalizada de ViewHolder que contiene referencias a las vistas de cada elemento de RecyclerView
     public class EjercicioViewHolder extends RecyclerView.ViewHolder {
 
         ImageView icon;

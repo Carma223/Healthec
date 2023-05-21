@@ -28,9 +28,11 @@ public class ConciliacionSueno extends AppCompatActivity {
         }else
             getSupportActionBar().show();
 
+        //asigna referencias de vistas y se configura el layoutManager de el recycler view para utilizar un GridLayoutManager con una sola columna
         rvLista=findViewById(R.id.rvLista);
         rvLista.setLayoutManager(new GridLayoutManager(this,1));
 
+        //Añade elementos a la lista sonidos, la cual tiene como atributos, nombre, sonidos, descripcion
         listaSonidos=new ArrayList<>();
         listaSonidos.add(new Sonido("Sonidos de la naturaleza","sonidoUno","Los sonidos de la naturaleza, el canto de los pájaros, el sonido del mar y el viento en los árboles, pueden ayudar a reducir el estrés y promover la relajación."));
         listaSonidos.add(new Sonido("Musica suave","sonidoDos","La música suave y tranquila, como la música clásica, la música ambiental o la música de meditación, puede ayudarte a reducir la ansiedad y promover la relajación."));
