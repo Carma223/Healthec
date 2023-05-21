@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import mx.GPS.healthec.modelos.UserModel;
 
 public class LoginActivity extends AppCompatActivity {
-
+    //--------------------------------------------------------------------------------------------//
     //Referencia a los botones y otros controles en el layout
     Button btn_registrar, btn_ingresar;
     EditText edt_email, edt_password;
@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
 
+    //--------------------------------------------------------------------------------------------//
 
     //METODO ONCREATE, SE EJECUTA CUNADO LOGINACTIVITY SE INICIA
     @Override
@@ -166,12 +167,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
+    //--------------------------------------------------------------------------------------------//
     private void SignIn() {
         Intent intent = gsc.getSignInIntent();
         startActivityForResult(intent, 100);
     }
-
+    //--------------------------------------------------------------------------------------------//
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -186,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
+    //--------------------------------------------------------------------------------------------//
     private void HomeActivity() {
         finish();
         Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);

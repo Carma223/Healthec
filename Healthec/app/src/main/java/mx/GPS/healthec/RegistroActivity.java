@@ -26,6 +26,7 @@ import com.google.firebase.database.Transaction;
 import mx.GPS.healthec.modelos.UserModel;
 
 public class RegistroActivity extends AppCompatActivity {
+    //--------------------------------------------------------------------------------------------//
     Button btn_registroAceptar;
     EditText edt_emailRegistro, edt_passwordRegistro, edt_nombreRegistro;
 
@@ -33,6 +34,8 @@ public class RegistroActivity extends AppCompatActivity {
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
+
+    //--------------------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +81,9 @@ public class RegistroActivity extends AppCompatActivity {
             }
 
         }*/
-
+//--------------------------------------------------------------------------------------------//
+        //Boton que implementa el registro de un nuevo usuario, se hace uso de la base de datos en Firebase para guardar los datos
+        //y se guarda localmente en el dispositivo del usuario las credenciales para hacaer referencia en otras partes de la app
         btn_registroAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +100,7 @@ public class RegistroActivity extends AppCompatActivity {
                         String password = edt_passwordRegistro.getText().toString();
                         String nombre = edt_nombreRegistro.getText().toString();
 
-                        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(nombre)) {
+                        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(nombre)) {
                             UserModel usuario = new UserModel(-1L, email, password, nombre);
 
                             DatabaseReference userRef = ref.push(); //se utiliza el método push() para crear un nuevo nodo con una clave única dentro de la referencia ref.
@@ -120,12 +125,15 @@ public class RegistroActivity extends AppCompatActivity {
 
                     }
 
+                    //--------------------------------------------------------------------------------------------//
+                    //Cuando se complete el registro se mandará a la pantalla del menu principal, de otro modo le
+                    //aparecera al usuario un mensaje alertandole que no se pudo realizar el registro
                     @Override
                     public void onComplete(DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
                         if (committed) {
                             Log.d("Firebase", "Transaction completed");
 
-                            startActivity( new Intent(RegistroActivity.this, MenuActivity.class));
+                            startActivity(new Intent(RegistroActivity.this, MenuActivity.class));
                             finish();
                         } else {
                             Log.d("Firebase", "Transaction aborted");
