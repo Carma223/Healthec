@@ -21,7 +21,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:shadowRadius="3"
-        android:text="¡Bienvenido! Con nuestros estiramientos suaves y efectivos, podrás relajar tu cuerpo y mente después de un día largo y agotador. Cada estiramiento se enfoca en áreas comunes de tensión, como el cuello, los hombros, la espalda y las piernas. Las instrucciones son claras y fáciles de seguir"
+        android:text="¡Bienvenido! Con nuestros estiramientos suaves y efectivos, podrás relajar tu cuerpo y mente después de un día largo y agotador. Cada estiramiento se enfoca en áreas comunes de tensión, como el cuello, los hombros, la espalda y las piernas."
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#AE000000"

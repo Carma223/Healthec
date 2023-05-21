@@ -51,21 +51,26 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
                 if (listaSonidos.get(position).getSonido().equals("sonidoUno")){
                     mediaPlayer=MediaPlayer.create(context,R.raw.naturaleza);
                     mediaPlayer.start();
+                    holder.btnReproducir.setText("Reproduciendo");
                 }else if(listaSonidos.get(position).getSonido().equals("sonidoDos")) {
                     mediaPlayer = MediaPlayer.create(context, R.raw.meditacion);
                     mediaPlayer.start();
+                    holder.btnReproducir.setText("Reproduciendo");
                 }
                 else if(listaSonidos.get(position).getSonido().equals("sonidoTres")) {
                     mediaPlayer = MediaPlayer.create(context, R.raw.asmr);
                     mediaPlayer.start();
+                    holder.btnReproducir.setText("Reproduciendo");
                 }
                 else if(listaSonidos.get(position).getSonido().equals("sonidoCuatro")) {
                     mediaPlayer = MediaPlayer.create(context, R.raw.lluvia);
                     mediaPlayer.start();
+                    holder.btnReproducir.setText("Reproduciendo");
                 }
                 else if(listaSonidos.get(position).getSonido().equals("sonidoCinco")) {
                     mediaPlayer = MediaPlayer.create(context, R.raw.piano);
                     mediaPlayer.start();
+                    holder.btnReproducir.setText("Reproduciendo");
                 }
             }
         });
@@ -73,6 +78,7 @@ public class AdaptadorSonidos extends RecyclerView.Adapter<AdaptadorSonidos.Soni
             @Override
             public void onClick(View view) {
                 mediaPlayer.stop();
+                holder.btnReproducir.setText("Reproducir");
             }
         });
     }

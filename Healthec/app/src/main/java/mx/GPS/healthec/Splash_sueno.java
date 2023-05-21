@@ -21,6 +21,7 @@ public class Splash_sueno extends AppCompatActivity {
     Button btnOmitir;
     private Handler handler;
     private Runnable runnable;
+    private Runnable runnable2;
     //-------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +49,14 @@ public class Splash_sueno extends AppCompatActivity {
         handler.postDelayed(runnable,DELAY);
         //-------------------------------------------------------------------------
         //establece que al terminar el tiempo del splash se inicia una actividad que es MainIntent
-        runnable = new Runnable() {
+        runnable2 = new Runnable() {
             @Override
             public void run() {
                 startActivity(mainIntent);
                 finish();
             }
         };
-        handler.postDelayed(runnable,SPLASH_TIME_OUT);
-        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable2,SPLASH_TIME_OUT);
         //-------------------------------------------------------------------------
         //Establece que el boton aparecera a los 3 segundos de iniciar la actividad
         runnable = new Runnable() {
@@ -67,6 +67,7 @@ public class Splash_sueno extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable,3000);
+
         //-------------------------------------------------------------------------
         int orientation=getResources().getConfiguration().orientation;
         if(orientation== Configuration.ORIENTATION_PORTRAIT){
@@ -74,13 +75,17 @@ public class Splash_sueno extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }else
             getSupportActionBar().show();
+
         //-------------------------------------------------------------------------
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(mainIntent);
+                handler.removeCallbacks(runnable2);
             }
+
         });
+
     }
     //-------------------------------------------------------------------------
     private void startAnimation() {

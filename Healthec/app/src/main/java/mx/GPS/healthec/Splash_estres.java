@@ -14,13 +14,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Splash_estres extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 10000;
+    private static int SPLASH_TIME_OUT = 12000;
     private TextView txt1;
     private TextView txt2;
-    private static final int DELAY = 5000; // 5 segundos
+    private static final int DELAY = 6000; // 5 segundos
     Button btnOmitir;
     private Handler handler;
     private Runnable runnable;
+    private Runnable runnable2;
     //-------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +55,14 @@ public class Splash_estres extends AppCompatActivity {
         handler.postDelayed(runnable, DELAY);
         //-------------------------------------------------------------------------
         //establece que al terminar el tiempo del splash se inicia una actividad que es MainIntent
-        runnable = new Runnable() {
+        runnable2 = new Runnable() {
             @Override
             public void run() {
                 startActivity(mainIntent);
                 finish();
             }
         };
-        handler.postDelayed(runnable, SPLASH_TIME_OUT);
-        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable2, SPLASH_TIME_OUT);
         //-------------------------------------------------------------------------
        //Establece que el boton aparecera a los 3 segundos de iniciar la actividad
         runnable = new Runnable() {
@@ -78,6 +78,7 @@ public class Splash_estres extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(mainIntent);
+                handler.removeCallbacks(runnable2);
             }
         });
     }
