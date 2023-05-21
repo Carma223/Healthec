@@ -37,43 +37,49 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class SleepActivity extends AppCompatActivity {
-    ImageButton btn_time;
-    ToggleButton tgbtn_actividad;
-    TextView txv_meta;
-    int hourSleep, minuteSleep;
+    //--------------------------------------------------------------------------------------------//
+    ImageButton btn_time; // Botón para seleccionar la hora del sueño
+    ToggleButton tgbtn_actividad; // Botón de alternancia para la actividad
+    TextView txv_meta; // TextView para mostrar la meta de sueño
+    int hourSleep, minuteSleep; // Variables para almacenar la hora y el minuto seleccionados
 
-    String savedKey, savedPassword, savedEmail;
+    String savedKey, savedPassword, savedEmail; // Variables para almacenar los datos del usuario
 
-    FirebaseDatabase database;
+    FirebaseDatabase database; // Instancia de la base de datos de Firebase
+    //--------------------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
+
+        // Obtener referencias a los elementos de la interfaz de usuario
         btn_time = findViewById(R.id.btnSleepHorario);
         tgbtn_actividad = findViewById(R.id.tgbtnSleep);
         txv_meta = findViewById(R.id.txvMetaSueno);
 
+        // Obtener los datos del usuario almacenados en SharedPreferences
         SharedPreferences prefs = getSharedPreferences("Account", MODE_PRIVATE);
         savedEmail = prefs.getString("email", null);
         savedPassword = prefs.getString("password", null);
         savedKey = prefs.getString("key", null);
 
-        //Inicializar tabla
+        // Inicializar el gráfico de barras
         BarChart barChart = findViewById(R.id.barChart);
 
-        //Inicializar db firebase
+        // Inicializar la instancia de la base de datos de Firebase
         database = FirebaseDatabase.getInstance();
 
+        // Obtener una referencia a la ubicación de los datos de sueño del usuario en la base de datos
         DatabaseReference timeRef = database.getReference().child("usuarios").child(savedKey).child("registroSueño");
 
-        // Agrega un listener para detectar cambios en los datos
+        // Agregar un listener para detectar cambios en los datos de sueño
         timeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Borra los datos existentes en el gráfico de barras
+                // Borrar los datos existentes en el gráfico de barras
                 barChart.clear();
 
-                // Recorre los datos en Firebase y agrega las entradas al gráfico de barras
+                // Recorrer los datos en Firebase y agregar las entradas al gráfico de barras
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 int index = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -84,7 +90,7 @@ public class SleepActivity extends AppCompatActivity {
                     index += 2;
                 }
 
-                // Crea el conjunto de datos y configura el gráfico de barras
+                // Crear el conjunto de datos y configurar el gráfico de barras
                 BarDataSet dataSet = new BarDataSet(entries, "Tiempo");
                 dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
                 BarData barData = new BarData(dataSet);
@@ -97,43 +103,37 @@ public class SleepActivity extends AppCompatActivity {
                 // Manejar el error de Firebase, si es necesario
             }
         });
-
-
     }
-
-    public void popTimePicker (View view)
-    {
+    //--------------------------------------------------------------------------------------------//
+    // Método para mostrar un diálogo de selección de hora
+    public void popTimePicker(View view) {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 hourSleep = selectedHour;
                 minuteSleep = selectedMinute;
 
-
-                txv_meta.setText(String.format(Locale.getDefault(), "%02d:%02d",hourSleep, minuteSleep));
-
+                // Mostrar la hora seleccionada en el TextView
+                txv_meta.setText(String.format(Locale.getDefault(), "%02d:%02d", hourSleep, minuteSleep));
             }
         };
 
         int style = AlertDialog.THEME_HOLO_DARK;
 
+        // Crear y mostrar el diálogo de selección de hora
         TimePickerDialog timePickerDialogOne = new TimePickerDialog(this, style, onTimeSetListener, hourSleep, minuteSleep, true);
-
-
-        timePickerDialogOne.setTitle("Selecciona el numero de horas que deseas dormir");
-
+        timePickerDialogOne.setTitle("Selecciona el número de horas que deseas dormir");
         timePickerDialogOne.show();
-
     }
+    //--------------------------------------------------------------------------------------------//
+    // Método para iniciar un servicio relacionado con el sueño
+    public void startService(View v) {
+        long durationSeconds = ((long) hourSleep * 3600) + (long) (minuteSleep * 60);
 
-    public void startService( View v){
-        long durationSeconds = ((long)hourSleep * 3600) + (long)(minuteSleep * 60);
-
+        // Crear un Intent para iniciar el servicio y pasar datos adicionales a través de extras
         Intent serviceIntent = new Intent(this, AcelerometerService.class);
         serviceIntent.putExtra("duration", durationSeconds);
         serviceIntent.putExtra("userKey", savedKey);
         startService(serviceIntent);
-
     }
-
 }
