@@ -17,8 +17,8 @@ public class SplashRelajacion extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 6000;
     private TextView txt1;
     Button btnOmitir;
-    private Handler handler;
-    private Runnable runnable;
+    private Handler handler, handler2;
+    private Runnable runnable,runnable2;
 
 
     @Override
@@ -36,14 +36,15 @@ public class SplashRelajacion extends AppCompatActivity {
         txt1 = findViewById(R.id.txt1);
         btnOmitir = findViewById(R.id.btnOmitir);
         handler = new Handler();
-        runnable = new Runnable() {
+        handler2 = new Handler();
+        runnable2 = new Runnable() {
             @Override
             public void run() {
                 txt1.setVisibility(View.VISIBLE);
                 startActivity(mainIntent);
             }
         };
-        handler.postDelayed(runnable, SPLASH_TIME_OUT);
+        handler2.postDelayed(runnable2, SPLASH_TIME_OUT);
 
         runnable = new Runnable() {
             @Override
@@ -58,7 +59,7 @@ public class SplashRelajacion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(mainIntent);
-                handler.removeCallbacks(runnable);
+                handler2.removeCallbacks(runnable2);
             }
         });
 
