@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +66,12 @@ public class RecetasActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int orientation=getResources().getConfiguration().orientation;
+        if(orientation== Configuration.ORIENTATION_PORTRAIT){
+            getSupportActionBar().hide();
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else
+            getSupportActionBar().show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recetas);
         srcvRecetas = findViewById(R.id.srcvRecetas);

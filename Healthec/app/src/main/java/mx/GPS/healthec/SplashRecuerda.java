@@ -16,6 +16,8 @@ public class SplashRecuerda extends AppCompatActivity {
 
     private static final long SPLASH_DURATION = 3000; // Duración en milisegundos
     private ProgressBar progressBar;
+    private Handler handler;
+    private Runnable runnable;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,7 +43,9 @@ public class SplashRecuerda extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
-        new Handler().postDelayed(new Runnable() {
+        handler = new Handler();
+
+        runnable = new Runnable(){
             @Override
             public void run() {
                 String nombreActividad = getIntent().getStringExtra("nombre");
@@ -50,8 +54,15 @@ public class SplashRecuerda extends AppCompatActivity {
                 startActivity(otraActividadIntent);
                 finish();
             }
-        }, SPLASH_DURATION);
+        };
+        handler.postDelayed(runnable, SPLASH_DURATION);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        handler.removeCallbacks(runnable);
     }
 }
 

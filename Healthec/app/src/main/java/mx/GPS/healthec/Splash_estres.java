@@ -82,6 +82,14 @@ public class Splash_estres extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        handler.removeCallbacks(runnable);
+        handler.removeCallbacks(runnable2);
+    }
+
     //-------------------------------------------------------------------------
     private void startAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide);

@@ -78,6 +78,7 @@
                 android:fontFamily="@font/acme"
                 android:hint="@string/nuevo_recordatorio"
                 android:inputType="textPersonName"
+                android:textColorHint="#000000"
                 tools:ignore="TouchTargetSizeCheck,VisualLintBounds" />
 
             <TextView
@@ -100,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#D740C4FF"
+                android:cacheColorHint="#000000"
                 android:scrollbars="vertical"></ListView>
         </LinearLayout>
 

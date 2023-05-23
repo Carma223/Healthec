@@ -16,6 +16,8 @@ public class SplashRecordatorios extends AppCompatActivity {
 
     private static final long SPLASH_DURATION = 3000; // Duración en milisegundos
     private ProgressBar progressBar;
+    private Handler handler;
+    private Runnable runnable;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,8 +42,9 @@ public class SplashRecordatorios extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
+        handler = new Handler();
 
-        new Handler().postDelayed(new Runnable() {
+        runnable = new Runnable() {
             @Override
             public void run() {
                 // Iniciar la siguiente actividad después del tiempo de espera
@@ -49,10 +52,14 @@ public class SplashRecordatorios extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, SPLASH_DURATION);
+        };
+        handler.postDelayed(runnable,SPLASH_DURATION);
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        handler.removeCallbacks(runnable);
     }
 }
 
