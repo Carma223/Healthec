@@ -140,9 +140,10 @@ public class RegistroActivity extends AppCompatActivity {
                     public void onComplete(DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
                         if (committed) {
                             Log.d("Firebase", "Transaction completed");
-
-                            startActivity(new Intent(RegistroActivity.this, MenuActivity.class));
+                            Intent intent = new Intent(RegistroActivity.this, MenuActivity.class);
+                            startActivity(intent);
                             finish();
+
                         } else {
                             Log.d("Firebase", "Transaction aborted");
 
@@ -150,6 +151,7 @@ public class RegistroActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }
                     }
+
 
                 });
 

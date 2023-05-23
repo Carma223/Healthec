@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -89,18 +90,21 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
         list.setAdapter(mAdapter);
 
 
-        agregaractividad.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
+        agregaractividad.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String actividadText = actividad.getText().toString().trim();
 
-                mLista.add(new Modelo(list.getCount()+1+"",actividad.getText().toString()));
-                mAdapter = new ListAdapter(RecordatoriosActivity.this, R.layout.item_row,mLista);
-                list.setAdapter(mAdapter);
-                nomarchivo="Recordatorios.txt";
+                if (TextUtils.isEmpty(actividadText)) {
+                    Toast.makeText(RecordatoriosActivity.this, "Debes ingresar un recordatorio válido", Toast.LENGTH_SHORT).show();
+                } else {
+                    mLista.add(new Modelo(list.getCount() + 1 + "", actividadText));
+                    mAdapter = new ListAdapter(RecordatoriosActivity.this, R.layout.item_row, mLista);
+                    list.setAdapter(mAdapter);
+                    nomarchivo = "Recordatorios.txt";
 
-                grabar();
-                actividad.setText("");
+                    grabar();
+                    actividad.setText("");
+                }
             }
         });
 
@@ -260,9 +264,27 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
 
 
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        eliminarElementoPorLongClick(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Elige la función deseada: ")
+                .setItems(new CharSequence[]{"EDITAR", "ELIMINAR"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                editarElementoPorLongClick(position);
+                                break;
+                            case 1:
+                                eliminarElementoPorLongClick(position);
+                                break;
+                        }
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .create()
+                .show();
         return true;
     }
+
 
     protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data)
     {
@@ -290,6 +312,33 @@ public class RecordatoriosActivity extends AppCompatActivity implements AdapterV
                 .create()
                 .show();
     }
+
+    private void editarElementoPorLongClick(int posicion) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Editar elemento");
+
+        // Crear un nuevo EditText para ingresar el nuevo nombre de la actividad
+        final EditText editText = new EditText(this);
+        editText.setText(mLista.get(posicion).getNombreactividad());
+        builder.setView(editText);
+
+        builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String nuevoNombre = editText.getText().toString();
+                mLista.get(posicion).setNombreactividad(nuevoNombre);
+                mAdapter.notifyDataSetChanged();
+                Toast.makeText(RecordatoriosActivity.this, "Elemento editado", Toast.LENGTH_SHORT).show();
+                grabarEliminar();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", null);
+
+        builder.create().show();
+    }
+
+
 
 }
 
