@@ -91,11 +91,11 @@ public class SleepActivity extends AppCompatActivity {
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 int index = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    int horas = snapshot.child("horas").getValue(Integer.class);
-                    Double minutosDouble = snapshot.child("minutos").getValue(Double.class);
-                    double minutos = (minutosDouble != null) ? minutosDouble.intValue() : 0;
+                    Integer horas = snapshot.child("horas").getValue(Integer.class);
+                    Float minutosDouble = snapshot.child("minutos").getValue(Float.class);
+                    float minutos = (minutosDouble != null) ? Float.valueOf(minutosDouble) : 0;
                     entries.add(new BarEntry(index, horas));
-                    entries.add(new BarEntry(index + 1, Double.valueOf(minutos).floatValue()));
+                    entries.add(new BarEntry(index + 1, minutos));
                     index += 2;
                 }
 

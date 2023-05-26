@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 
 public class AcelerometerService extends Service implements SensorEventListener {
@@ -55,7 +56,7 @@ public class AcelerometerService extends Service implements SensorEventListener 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Obtener la duración y la clave del usuario pasados como extras en el intent
-        duration = 5;//intent.getLongExtra("duration", 0);
+        duration = intent.getLongExtra("duration", 0);
         userKey = intent.getStringExtra("userKey");
         endTimeMillis = System.currentTimeMillis() + (duration * 1000); // Calcular el tiempo de finalización
         awakeTime = 0;
@@ -86,14 +87,14 @@ public class AcelerometerService extends Service implements SensorEventListener 
                 // Detener el servicio
                 sensorManager.unregisterListener(this);
 
-                awakeTime = awakeTime / 5.5f;
+                awakeTime = awakeTime / 5.5;
 
                 Log.d("Healthec", Double.toString(awakeTime));
 
                 double realTimeSleep = Math.round(Math.abs(duration - awakeTime));
 
                 double horas = convertSecondsToHour(realTimeSleep);
-                double minutos = convertSecondsToMinutes(realTimeSleep);
+                double minutos = (double)Math.round(convertSecondsToMinutes(realTimeSleep) * 100d) / 100d;
 
                 try {
                     // Obtener la referencia a la ubicación de los datos de sueño del usuario en la base de datos
