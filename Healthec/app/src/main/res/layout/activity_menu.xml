@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="182dp"
-        android:layout_height="145dp"
+        android:layout_width="138dp"
+        android:layout_height="133dp"
         android:backgroundTint="#F6DDB9"
         android:contentDescription="@string/ejercicios"
         android:onClick="btnModuloMeditacionClick"
@@ -26,8 +26,8 @@
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="182dp"
-        android:layout_height="145dp"
+        android:layout_width="152dp"
+        android:layout_height="120dp"
         android:backgroundTint="#F6DDB9"
         android:contentDescription="@string/recetas"
         android:onClick="btnModuloRecetasClick"
@@ -42,17 +42,17 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="182dp"
-        android:layout_height="145dp"
+        android:layout_width="138dp"
+        android:layout_height="119dp"
         android:backgroundTint="#F6DDB9"
         android:contentDescription="@string/recordatorios"
         android:onClick="btnModuloRecordatorioClick"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897"
+        app:layout_constraintVertical_bias="0.896"
         app:srcCompat="@drawable/rec"
         app:tint="#BC9696" />
 
@@ -87,8 +87,8 @@
 
     <TextView
         android:id="@+id/txtvFrase"
-        android:layout_width="273dp"
-        android:layout_height="100dp"
+        android:layout_width="278dp"
+        android:layout_height="83dp"
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
         android:onClick="btnFraseClick"
@@ -104,8 +104,8 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="182dp"
-        android:layout_height="145dp"
+        android:layout_width="147dp"
+        android:layout_height="127dp"
         android:backgroundTint="#F6DDB9"
         android:contentDescription="@string/sleep"
         android:onClick="btnModuloSueñoClick"

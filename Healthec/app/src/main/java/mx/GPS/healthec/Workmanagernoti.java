@@ -65,7 +65,7 @@ public class Workmanagernoti extends Worker {
         Intent intent = new Intent(getApplicationContext(),RecordatoriosActivity.class);
 
         intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_MUTABLE);
 
         builder.setAutoCancel(true)
                 .setWhen(System.currentTimeMillis())
