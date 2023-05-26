@@ -43,6 +43,7 @@ public class IngredientesActivity extends AppCompatActivity implements SearchVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredientes);
         srcIngredientes = findViewById(R.id.srcvIngredientes);
+        getSupportActionBar().hide();
 
 
         recvIngredientes = findViewById(R.id.recvIngredientes);

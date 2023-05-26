@@ -8,8 +8,11 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -31,6 +34,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,11 +51,14 @@ public class SleepActivity extends AppCompatActivity {
     String savedKey, savedPassword, savedEmail; // Variables para almacenar los datos del usuario
 
     FirebaseDatabase database; // Instancia de la base de datos de Firebase
+
     //--------------------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
+
+        getSupportActionBar().hide();
 
         // Obtener referencias a los elementos de la interfaz de usuario
         btn_time = findViewById(R.id.btnSleepHorario);
@@ -103,6 +111,7 @@ public class SleepActivity extends AppCompatActivity {
                 // Manejar el error de Firebase, si es necesario
             }
         });
+
     }
     //--------------------------------------------------------------------------------------------//
     // Método para mostrar un diálogo de selección de hora
@@ -124,16 +133,30 @@ public class SleepActivity extends AppCompatActivity {
         TimePickerDialog timePickerDialogOne = new TimePickerDialog(this, style, onTimeSetListener, hourSleep, minuteSleep, true);
         timePickerDialogOne.setTitle("Selecciona el número de horas que deseas dormir");
         timePickerDialogOne.show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle("Importante").setMessage("Para poder hacer uso efectivo de esta\n" +
+                                                  "fucnión, coloca boca abajo el celular\n" +
+                                                  "para indicar que iniciaste tu periodo\n" +
+                                                  "de sueño.").setIcon(R.drawable.alerta).setPositiveButton("Entendido",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        }).
+                create().show();
     }
     //--------------------------------------------------------------------------------------------//
     // Método para iniciar un servicio relacionado con el sueño
     public void startService(View v) {
         long durationSeconds = ((long) hourSleep * 3600) + (long) (minuteSleep * 60);
-
+        tgbtn_actividad.performClick();
         // Crear un Intent para iniciar el servicio y pasar datos adicionales a través de extras
         Intent serviceIntent = new Intent(this, AcelerometerService.class);
         serviceIntent.putExtra("duration", durationSeconds);
         serviceIntent.putExtra("userKey", savedKey);
         startService(serviceIntent);
     }
+
 }

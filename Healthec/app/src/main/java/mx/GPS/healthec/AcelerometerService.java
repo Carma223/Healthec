@@ -11,7 +11,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.util.Locale;
+
 public class AcelerometerService extends Service implements SensorEventListener {
     //--------------------------------------------------------------------------------------------//
     private SensorManager sensorManager;
@@ -33,6 +37,8 @@ public class AcelerometerService extends Service implements SensorEventListener 
 
     FirebaseDatabase database;
     DatabaseReference ref;
+
+
     //--------------------------------------------------------------------------------------------//
     @Override
     public void onCreate() {
@@ -41,6 +47,7 @@ public class AcelerometerService extends Service implements SensorEventListener 
         // Inicializar el SensorManager y el acelerómetro
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
     }
     //--------------------------------------------------------------------------------------------//
     @Override
@@ -64,9 +71,12 @@ public class AcelerometerService extends Service implements SensorEventListener 
     public void onSensorChanged(SensorEvent event) {
         // Lógica para procesar los datos del acelerómetro
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            float y = event.values[1];
             float z = event.values[2];
 
-            if (z > 0) {
+
+            if (x > -.35 || y > .35 || z > .35 ) {
                 awakeTime++;
             }
 
@@ -143,4 +153,5 @@ public class AcelerometerService extends Service implements SensorEventListener 
 
         return minutes;
     }
+
 }

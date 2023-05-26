@@ -58,7 +58,7 @@
             android:id="@+id/btnSleepHorario"
             android:layout_width="140dp"
             android:layout_height="134dp"
-            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
             android:background="@null"
             android:onClick="popTimePicker"
             android:scaleType="fitXY"
