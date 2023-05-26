@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class ConciliacionSueno extends AppCompatActivity {
 
+    MediaPlayer mediaPlayer;
     RecyclerView rvLista;
     List<Sonido> listaSonidos;
     @Override
@@ -47,6 +49,9 @@ public class ConciliacionSueno extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (mediaPlayer!=null){
+            mediaPlayer.stop();
+        }
         finish();
     }
 
