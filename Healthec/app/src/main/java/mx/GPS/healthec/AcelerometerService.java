@@ -38,8 +38,6 @@ public class AcelerometerService extends Service implements SensorEventListener 
     FirebaseDatabase database;
     DatabaseReference ref;
 
-    double x, y, z;
-
 
     //--------------------------------------------------------------------------------------------//
     @Override
@@ -55,9 +53,9 @@ public class AcelerometerService extends Service implements SensorEventListener 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Obtener la duración y la clave del usuario pasados como extras en el intent
-        duration = 5;//intent.getLongExtra("duration", 0);
-        userKey = intent.getStringExtra("userKey");
-        endTimeMillis = System.currentTimeMillis() + (duration * 1000); // Calcular el tiempo de finalización
+        duration = intent.getLongExtra("duration", 0);
+        userKey = intent.getStringExtra("key");
+        endTimeMillis = System.currentTimeMillis() + (5 * 1000); // Calcular el tiempo de finalización
         awakeTime = 0;
 
         // Registrar el SensorEventListener para el acelerómetro
@@ -73,12 +71,12 @@ public class AcelerometerService extends Service implements SensorEventListener 
     public void onSensorChanged(SensorEvent event) {
         // Lógica para procesar los datos del acelerómetro
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            x = event.values[0];
-            y = event.values[1];
-            z = event.values[2];
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
 
 
-            if (y > 0.5 || z > 0.5 ) {
+            if (x > -.35 || y > .35 || z > .35 ) {
                 awakeTime++;
             }
 
@@ -86,14 +84,14 @@ public class AcelerometerService extends Service implements SensorEventListener 
                 // Detener el servicio
                 sensorManager.unregisterListener(this);
 
-                awakeTime = awakeTime / 5.5f;
+                awakeTime = awakeTime / 5.5;
 
                 Log.d("Healthec", Double.toString(awakeTime));
 
                 double realTimeSleep = Math.round(Math.abs(duration - awakeTime));
 
-                double horas = convertSecondsToHour(realTimeSleep);
-                double minutos = convertSecondsToMinutes(realTimeSleep);
+                int horas = convertSecondsToHour(realTimeSleep);
+                int minutos = convertSecondsToMinutes(realTimeSleep);
 
                 try {
                     // Obtener la referencia a la ubicación de los datos de sueño del usuario en la base de datos
@@ -143,20 +141,15 @@ public class AcelerometerService extends Service implements SensorEventListener 
         return null;
     }
     //--------------------------------------------------------------------------------------------//
-    public static double convertSecondsToHour(double totalSeconds) {
-        double hours;
-        if(totalSeconds < 3600){
-            hours = 0;
-        } else {
-            hours = (totalSeconds / 3600f); // Calcular el número entero de horas
-        }
+    public static int convertSecondsToHour(double totalSeconds) {
+        int hours = (int) (totalSeconds / 3600); // Calcular el número entero de horas
 
         return hours;
     }
     //--------------------------------------------------------------------------------------------//
-    public static double convertSecondsToMinutes(double totalSeconds) {
-        double remainingSeconds = totalSeconds % 3600f;
-        double minutes = (remainingSeconds / 3600f);
+    public static int convertSecondsToMinutes(double totalSeconds) {
+        double remainingSeconds = totalSeconds % 3600;
+        int minutes = (int) (remainingSeconds / 3600);
 
         return minutes;
     }
