@@ -26,7 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Meta de sueño actual:"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
     <TextView
         android:id="@+id/txvMetaSueno"
@@ -70,7 +72,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Sueño real:"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
     </LinearLayout>
 
     <LinearLayout
