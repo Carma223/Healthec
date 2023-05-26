@@ -92,13 +92,11 @@ public class SleepActivity extends AppCompatActivity {
                 int index = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     int horas = snapshot.child("horas").getValue(Integer.class);
-                    Double minutosDouble = snapshot.child("minutos").getValue(Double.class);
-                    double minutos = (minutosDouble != null) ? minutosDouble.intValue() : 0;
+                    int minutos = snapshot.child("minutos").getValue(Integer.class);
                     entries.add(new BarEntry(index, horas));
-                    entries.add(new BarEntry(index + 1, Double.valueOf(minutos).floatValue()));
+                    entries.add(new BarEntry(index + 1, minutos));
                     index += 2;
                 }
-
 
                 // Crear el conjunto de datos y configurar el gráfico de barras
                 BarDataSet dataSet = new BarDataSet(entries, "Tiempo");

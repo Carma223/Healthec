@@ -32,9 +32,7 @@
         android:ems="10"
         android:hint="@string/Nombre"
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/edt_correoRegistro"
@@ -45,9 +43,7 @@
         android:ems="10"
         android:hint="@string/UsuarioCorreo"
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/edt_passwordRegistro"
@@ -58,9 +54,7 @@
         android:ems="10"
         android:hint="@string/UsuarioContraseña"
         android:inputType="textPassword"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btn_registroAccept"

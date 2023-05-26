@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "mx.GPS.healthec"
         minSdk 24
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -48,7 +48,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'androidx.work:work-runtime:2.7.1'
+
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'

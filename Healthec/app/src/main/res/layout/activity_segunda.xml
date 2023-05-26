@@ -16,8 +16,6 @@
         android:fontFamily="@font/acme"
         android:gravity="center"
         android:text="@string/textview"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
         android:textSize="25sp" />
 
     <ImageView
@@ -47,8 +45,6 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:hint="@string/fecha_seleccionada"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
                 android:textSize="20sp"
                 tools:ignore="TextSizeCheck" />
 
@@ -77,8 +73,6 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:hint="@string/hora_seleccionada"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
                 android:textSize="20sp"
                 tools:ignore="TextSizeCheck" />
 
